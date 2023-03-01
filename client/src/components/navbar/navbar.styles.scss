@@ -1,0 +1,41 @@
+.nav{
+    background-color:#2EC4B6 ;
+    &__container{
+        width: 80%;
+        margin: 0 auto;
+        nav{
+
+            display: flex;
+            padding: 1rem 3rem;
+            gap:70%;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    }
+    &__p1{
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 50px;
+    }
+    &__p2{
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 25px;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        
+    }
+    &__item{
+
+        &-profile{
+            img{
+                
+                width: 3rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.btn {
+  border: none;
+  outline: none;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  cursor: pointer;
+  text-transform: capitalize;
+  &--green {
+    border-radius: 4rem;
+    background-color: #20c997;
+  }
+  &--blue {
+    background: #007bff;
+    color: #ffffff;
+    border-radius: 0.4rem;
+    // padding: 1.1rem 4rem;
+    // text-transform: none;
+    // text-transform: ;
+  }
+
+  &--transparent {
+    background: #353535;
+    color: #ffffff;
+    border-radius: 4rem;
+  }
+}

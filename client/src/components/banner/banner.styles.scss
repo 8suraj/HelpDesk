@@ -1,0 +1,39 @@
+.banner{
+    &__container{
+        width: 80%;
+        margin: 0 auto;
+        padding: 1rem 3rem;
+        &-1{
+        display: flex;
+        align-items: center;
+        img{
+            width: 50rem;
+        }
+        }
+        &-2{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 40rem;
+        }
+        }
+        
+    }
+     &__item{
+        text-transform: capitalize;
+        text-align: left;
+        color: #2EC4B6;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 100px;
+        &-text{
+            transform: translateX(25%);
+            span{
+                color:#FF9F1C;
+            }
+        }
+        
+     }
+}

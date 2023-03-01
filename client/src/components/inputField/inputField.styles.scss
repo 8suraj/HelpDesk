@@ -1,0 +1,36 @@
+::placeholder {
+  color: #ffffff;
+  font-family: 'gothic';
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+}
+
+.input__form {
+  width: 480px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 4px;
+  outline: none;
+  color: #ffffff;
+  font-family: 'gothic';
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+.register__form {
+  width:30rem;
+  height: 4.2rem;
+  border: 1px solid #20C997;
+  border-radius: 0.4rem;
+  background: transparent;
+  padding: 0rem 0rem 0rem 1rem;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #ffffff;
+  outline: none;
+}
