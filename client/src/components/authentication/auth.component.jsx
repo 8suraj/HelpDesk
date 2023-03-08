@@ -30,26 +30,26 @@ export const login = async (
   setCurrentUserToken,
   navigate
 ) => {
-  // const payload = JSON.stringify({
-  //   username,
-  //   password,
-  // });
-  // try {
-  //   const result = await postRequest(
-  //     'api/v1/signin',
-  //     payload
-  //   );
-  //   setCurrentUserToken(
-  //     result.data.data.access_token.token
-  //   );
-  //   setToken(result.data.data.access_token.token);
-  //   navigate(-1, { replace: true });
-  //   return null;
-  // } catch (err) {
-  //   // console.log(err.response.data.error.message);
-  //   return err.response.data.error.message;
-  // }
-  // return;
+  const payload = JSON.stringify({
+    username,
+    password,
+  });
+  try {
+    const result = await postRequest(
+      'api/v1/signin',
+      payload
+    );
+    setCurrentUserToken(
+      result.data.data.access_token.token
+    );
+    setToken(result.data.data.access_token.token);
+    navigate(-1, { replace: true });
+    return null;
+  } catch (err) {
+    // console.log(err.response.data.error.message);
+    return err.response.data.error.message;
+  }
+  return;
 };
 export const loggedIn = () => {
   // Checks if there is a saved token and it's still valid

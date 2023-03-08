@@ -1,0 +1,25 @@
+{
+  "name": "helpdesk",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000H\u0000e\u0000l\u0000p\u0000D\u0000e\u0000s\u0000k\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install": "npm run install-server && npm run install-client",
+    "client":"npm run start --prefix client",
+    "server":"npm run watch --prefix server",
+    "deploy": "npm run build --prefix client && npm start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8suraj/HelpDesk.git"
+  },
+  "keywords": [],
+  "author": "suraj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/8suraj/HelpDesk/issues"
+  },
+  "homepage": "https://github.com/8suraj/HelpDesk#readme"
+}
