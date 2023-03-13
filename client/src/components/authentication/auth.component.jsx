@@ -30,24 +30,27 @@ export const login = async (
   setCurrentUserToken,
   navigate
 ) => {
-  const payload = JSON.stringify({
-    username,
-    password,
-  });
+  // const payload = JSON.stringify({
+  //   username,
+  //   password,
+  // });
+  // console.log(payload)
+
   try {
-    const result = await postRequest(
-      'api/v1/signin',
-      payload
-    );
+    const result = await postRequest('auth/login',{
+      username,
+      password,
+    });
+    console.log(result)
     setCurrentUserToken(
-      result.data.data.access_token.token
+      result.data.token
     );
-    setToken(result.data.data.access_token.token);
+    setToken(result.data.token);
     navigate(-1, { replace: true });
     return null;
   } catch (err) {
     // console.log(err.response.data.error.message);
-    return err.response.data.error.message;
+    return err.message;
   }
   return;
 };
@@ -79,10 +82,7 @@ export const register = async (
   });
   console.log(payload);
   try {
-    const result = await postRequest(
-      'api/v1/signup',
-      payload
-    );
+    const result = await postRequest('api/v1/signup',payload);
     console.log(result);
     setCurrentUserToken(
       result.data.data.access_token.token

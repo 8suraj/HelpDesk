@@ -1,30 +1,21 @@
 import axios from 'axios';
 
 const axiosClient = axios.create();
-axiosClient.defaults.baseURL = '';
+axiosClient.defaults.baseURL = 'http://localhost:7000';
 axiosClient.defaults.headers = {
   Accept: 'application/json',
-  // ContentType: 'application/json',
-  // 'Access-Control-Allow-Origin': '*',
-  // credentials: 'same-origin',
 };
 
-// All request will wait 2 seconds before timeout
-
-// axiosClient.defaults.timeout = 10000;
-// axiosClient.defaults.headers.post['Content-Type'] =
-//   'application/json;charset=utf-8';
-
-// cross-site Access-Control requests
 axiosClient.defaults.withCredentials = false;
 
-export function getRequest(URL) {
+export function getRequest([URL,param]) {
   return axiosClient
-    .get(`/${URL}`)
+    .get(`/${URL}`,{params:param})
     .then((response) => response);
 }
 
 export function postRequest(URL, payload) {
+  
   return axiosClient
     .post(`/${URL}`, payload)
     .then((response) => response);
@@ -36,8 +27,8 @@ export function patchRequest(URL, payload) {
     .then((response) => response);
 }
 
-export function deleteRequest(URL) {
+export function deleteRequest([URL,param]) {
   return axiosClient
-    .delete(`/${URL}`)
+    .delete(`/${URL}`,{params:param})
     .then((response) => response);
 }

@@ -1,17 +1,14 @@
-
 import './App.css';
-import {NavbarIssuer} from './components/navbar/navbar.component'
-import {BannerIssuer} from './components/banner/banner.component'
-// import { InputField } from './components/inputField/inputField.component';
 import Login from './pages/login/login.router'
-
+import { Routes,Route } from "react-router-dom";
+// import {NavbarRaiser } from './components/navbar/navbar.component'
 function App() {
   return (
     <div className="App">
-      <NavbarIssuer/>
-      <BannerIssuer/>
-     {/* <Login /> */}
-     {/* <InputField /> */}
+      <Routes>
+        <Route path="/" element={<Login/>} />
+
+      </Routes>
     </div>
   );
 }

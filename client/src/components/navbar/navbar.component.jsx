@@ -25,6 +25,7 @@ export const NavbarRaiser = () => {
 
 export const NavbarIssuer = () => {
   return (
+    <>
     <div className='nav'>
       <div className='nav__container'>
         <nav>
@@ -43,6 +44,7 @@ export const NavbarIssuer = () => {
         </nav>
       </div>
     </div>
+    </>
   )
 }
 

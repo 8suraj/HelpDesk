@@ -7,5 +7,6 @@ raiserRouter.get('/',(req, res)=>{
       "ad":"asdasdsseeeeeeeeeee",
     })
   })
+raiserRouter.get('/')
 
-module.exports ={ raiserRouter}
+module.exports ={raiserRouter}

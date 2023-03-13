@@ -1,36 +1,28 @@
-::placeholder {
-  color: #ffffff;
-  font-family: 'gothic';
-  font-weight: 600;
-  font-size: 1.4rem;
-  line-height: 1.9rem;
+.input{
+  all: unset;
 }
-
-.input__form {
-  width: 480px;
-  height: 46px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 4px;
-  outline: none;
-  color: #ffffff;
-  font-family: 'gothic';
-  font-weight: 600;
-  font-size: 1.4rem;
-  line-height: 1.9rem;
-  padding: 0rem 0rem 0rem 1rem;
+.inputBoundary{
+  margin: 1rem 0;
+  text-align: start;
+  p{
+    padding-left: calc(100% - 95%);
+    color:#ec0303;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin: .1rem 0;
+    display: inline-block;
+  }
 }
+.inputImg{
+  position: relative;
 
-.register__form {
-  width:30rem;
-  height: 4.2rem;
-  border: 1px solid #20C997;
-  border-radius: 0.4rem;
-  background: transparent;
-  padding: 0rem 0rem 0rem 1rem;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1rem;
-  color: #ffffff;
-  outline: none;
+    img{
+        position: absolute;
+        left: 8%;
+        top:50%;
+        transform: translate(-50%,-50%);
+    }
+}
+.error{
+  border: 2px solid red;
 }

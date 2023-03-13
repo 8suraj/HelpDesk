@@ -7,6 +7,7 @@ export function InputField({
   type,
   className,
   placeholder,
+  img
 }) {
   const [field, meta] = useField(name);
   const [error, setError] = useState(null);
@@ -14,17 +15,18 @@ export function InputField({
     setError(meta.error);
   }, [meta.error, meta.touched]);
   return (
-    <div className='input'>
-      <div>
+    <div className='inputBoundary'>
+      <div className={img&&'inputImg'}>
+        {img&&<img src={img} alt="" />}
         <input
           {...field}
           type={type}
-          className={className}
+          className={` ${className} ${error&&'error'} `}
           placeholder={placeholder}
           name={name}
         />
       </div>
-      {error && <div>{error}</div>}
+      {error && <p>{error}</p>}
     </div>
   );
 }
