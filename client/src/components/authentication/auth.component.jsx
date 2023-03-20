@@ -1,20 +1,13 @@
-import decode from 'jwt-decode';
-import { postRequest } from '../../api/api';
-/* eslint-disable no-unused-vars */
-
-// Saves user token to localStorage
+import decode from "jwt-decode";
+import { postRequest } from "../../api/api";
 export const setToken = (userToken) => {
-  localStorage.setItem('user_token', userToken);
+  localStorage.setItem("user_token", userToken);
 };
 
-// Retrieves the user token from localStorage
-export const getToken = () =>
-  localStorage.getItem('user_token');
-// Checking if token is expired.
+export const getToken = () => localStorage.getItem("user_token");
 export const isTokenExpired = (token) => {
   try {
     const decoded = decode(token);
-    console.log(decoded);
     if (decoded.exp < Date.now() / 1000) {
       return true;
     }
@@ -30,39 +23,28 @@ export const login = async (
   setCurrentUserToken,
   navigate
 ) => {
-  // const payload = JSON.stringify({
-  //   username,
-  //   password,
-  // });
-  // console.log(payload)
+  const payload = JSON.stringify({
+    username,
+    password,
+  });
 
   try {
-    const result = await postRequest('auth/login',{
-      username,
-      password,
-    });
-    console.log(result)
-    setCurrentUserToken(
-      result.data.token
-    );
+    const result = await postRequest("auth/login", payload);
+    setCurrentUserToken(result.data.token);
     setToken(result.data.token);
     navigate(-1, { replace: true });
     return null;
   } catch (err) {
-    // console.log(err.response.data.error.message);
     return err.message;
   }
-  return;
 };
 export const loggedIn = () => {
-  // Checks if there is a saved token and it's still valid
-  const token = this.getToken(); // Getting token from localstorage
-  return !!token && !this.isTokenExpired(token); // handwaiving here
+  const token = getToken();
+  return !!token && !isTokenExpired(token);
 };
 
-// Clear user token and profile data from localStorage
 export const logout = (setCurrentUserToken) => {
-  localStorage.removeItem('user_token');
+  localStorage.removeItem("user_token");
   setCurrentUserToken(null);
 };
 
@@ -82,13 +64,11 @@ export const register = async (
   });
   console.log(payload);
   try {
-    const result = await postRequest('api/v1/signup',payload);
+    const result = await postRequest("api/v1/signup", payload);
     console.log(result);
-    setCurrentUserToken(
-      result.data.data.access_token.token
-    );
+    setCurrentUserToken(result.data.data.access_token.token);
     setToken(result.data.data.access_token.token);
-    navigate('/', { replace: true });
+    navigate("/", { replace: true });
     return null;
   } catch (err) {
     console.log(err.response.data.error.message);

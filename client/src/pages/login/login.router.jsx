@@ -10,6 +10,7 @@ import loginSvg from '../../assest/svgs/login.svg'
 import { InputField } from '../../components/inputField/inputField.component';
 import { login } from '../../components/authentication/auth.component';
 import ValidationSchema from '../../components/authentication/validationSchemaLogIn';
+
 const Login = () => {
     const { setCurrentUserToken } = useContext(UserContext);
     const navigate = useNavigate();

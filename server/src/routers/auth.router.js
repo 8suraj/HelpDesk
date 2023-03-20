@@ -26,6 +26,7 @@ authRouter.post("/signup", (req, res) => {
 
 authRouter.post("/login", (req, res) => {
     console.log(req.body)
+    console.log(req.headers)
     // bb = JSON.parse(req.body)
     User.findOne({username: req.body.username.toLowerCase()}).then(data => {
         if (!data || data.password !== req.body.password) {

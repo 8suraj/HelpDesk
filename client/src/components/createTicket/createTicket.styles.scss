@@ -1,0 +1,136 @@
+// @import "react-widgets/styles.css";
+.createTicket {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: aliceblue;
+  width: 30vw;
+  height: 90vh;
+  box-shadow: 2px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  &__head {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 3rem;
+
+    color: #ffffff;
+    box-sizing: border-box;
+    flex: 1.5;
+    background-color: #2ec4b6;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__1 {
+      display: inline;
+      margin-left: 1.5rem;
+    }
+    &__2 {
+      display: inline;
+      margin-right: 2rem;
+      img {
+        width: 2.5rem;
+      }
+    }
+  }
+  &__body {
+    flex: 8.5;
+  }
+}
+.ticketField {
+  all: unset;
+  box-sizing: border-box;
+  width: calc(100%);
+  line-height: 2rem;
+  border: 2px solid #2ec4b6;
+  border-radius: 0.5rem;
+  font-family: "Nunito";
+  text-align: start;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.4rem;
+  padding: 0.7rem;
+  color: black;
+  &textarea {
+    resize: none;
+    box-sizing: border-box;
+    width: calc(100%);
+    border: 2px solid #2ec4b6;
+    border-radius: 0.5rem;
+    font-family: "Nunito";
+    text-overflow: clip;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.4rem;
+    padding: 0.7rem;
+    height: 8rem;
+  }
+}
+.ticket {
+  &__form {
+    width: 80%;
+    margin: 0 auto;
+    &-header {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 28px;
+      margin-top: 2.7rem;
+      margin-bottom: 1.7rem;
+    }
+  }
+}
+.btn--squareBlue {
+  background: #011627;
+  border-radius: 7px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  /* identical to box height */
+
+  color: #2ec4b6;
+}
+
+.holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  p {
+    color: black;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+  }
+}
+.selectInput {
+  border: 2px solid #2ec4b6;
+  border-radius: 0.5rem;
+  text-align: start;
+  color: black;
+
+  &:focus,
+  &:active {
+    border: 2px solid #2ec4b6;
+    border-radius: 0.5rem;
+  }
+}
+.selectDiv {
+  margin: 1rem 0;
+  text-align: start;
+  label {
+    margin: 0;
+    padding: 0;
+  }
+}
+.hide {
+  display: none;
+}

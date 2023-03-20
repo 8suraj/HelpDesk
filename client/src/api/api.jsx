@@ -1,12 +1,13 @@
 import axios from 'axios';
-
+import { loggedIn,getToken } from '../components/authentication/auth.component';
 const axiosClient = axios.create();
-axiosClient.defaults.baseURL = 'http://localhost:7000';
+axiosClient.defaults.baseURL = 'http://localhost:7000/'+process.env.REACT_APP_API_V1;
 axiosClient.defaults.headers = {
   Accept: 'application/json',
+  'Content-Type':'application/json',
 };
 
-axiosClient.defaults.withCredentials = false;
+axiosClient.defaults.withCredentials = true;
 
 export function getRequest([URL,param]) {
   return axiosClient
@@ -32,3 +33,12 @@ export function deleteRequest([URL,param]) {
     .delete(`/${URL}`,{params:param})
     .then((response) => response);
 }
+
+axiosClient.interceptors.request.use((config) => {
+  if (loggedIn()) {
+    config.headers['Authorization'] = `Bearer ${getToken()}`; 
+    console.log(config.headers);
+    return config;
+  }
+  return config;
+});
