@@ -2,23 +2,24 @@ import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { UserContext } from "../../context/user.context";
-import "./login.styles.scss";
+import "./register.styles.scss";
 import Button from "../../components/button/button.component";
 import lock from "../../assest/svgs/lock.svg";
 import email from "../../assest/svgs/email.svg";
+import user from "../../assest/svgs/user.svg";
 import loginSvg from "../../assest/svgs/login.svg";
 import { InputField } from "../../components/inputField/inputField.component";
-import { login } from "../../components/authentication/auth.component";
-import ValidationSchema from "../../components/authentication/validationSchemaLogIn";
+import { register } from "../../components/authentication/auth.component";
+import ValidationSchema from "../../components/authentication/validationSchemaRegister";
 
-export default function Login() {
+export default function Register() {
   const { setCurrentUserToken } = useContext(UserContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const handleSubmit = (values) => {
-    const { username, password } = values;
-    login(username, password, setCurrentUserToken, navigate).then((err) =>
-      setError(err)
+    const { username, password, email } = values;
+    register(username, password, email, setCurrentUserToken, navigate).then(
+      (err) => setError(err)
     );
   };
   return (
@@ -33,26 +34,36 @@ export default function Login() {
           <div className="login__container-2">
             <div className="login__body-2">
               <div className="login__body-2-header">
-                welcome <span>back</span>
+                Register <span>Now</span>
               </div>
               <Formik
-                initialValues={{ username: "", password: "" }}
+                initialValues={{
+                  username: "",
+                  password: "",
+                  confirmPassword: "",
+                  email: "",
+                }}
                 enableReinitialize
                 validationSchema={ValidationSchema}
                 onSubmit={handleSubmit}
               >
                 <div className="login__form">
                   <Form>
-                    <div className="login__form-header">Login with your</div>
-                    {/* <div className='login__form'> */}
                     <InputField
                       name="username"
                       className="loginField"
                       type="text"
                       placeholder="Username"
-                      img={email}
+                      img={user}
                     />
 
+                    <InputField
+                      name="email"
+                      className="loginField"
+                      type="email"
+                      placeholder="Email"
+                      img={email}
+                    />
                     <InputField
                       name="password"
                       className="loginField"
@@ -60,10 +71,17 @@ export default function Login() {
                       placeholder="Password"
                       img={lock}
                     />
+                    <InputField
+                      name="confirmPassword"
+                      className="loginField"
+                      type="password"
+                      placeholder="Confirm Password"
+                      img={lock}
+                    />
                     {error && <div>{error}</div>}
-                    <Link to="/register">
+                    <Link to="/">
                       <div className="login__form--bottom">
-                        <p>Don’t have account ? Sign Up</p>
+                        <p>Already have an account ? Sign In</p>
                       </div>
                     </Link>
                     <Button

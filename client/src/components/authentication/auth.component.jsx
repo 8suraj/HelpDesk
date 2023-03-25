@@ -12,7 +12,6 @@ export const isTokenExpired = (token) => {
       return true;
     }
   } catch (err) {
-    console.log(err);
     return false;
   }
   return false;
@@ -35,7 +34,7 @@ export const login = async (
     navigate(-1, { replace: true });
     return null;
   } catch (err) {
-    return err.message;
+    return err.response.data.error;
   }
 };
 export const loggedIn = () => {
@@ -49,29 +48,25 @@ export const logout = (setCurrentUserToken) => {
 };
 
 export const register = async (
-  name,
+  username,
   password,
   email,
-  mobile,
   setCurrentUserToken,
   navigate
 ) => {
   const payload = JSON.stringify({
-    username: name,
+    username,
     email,
-    mobile,
     password,
   });
-  console.log(payload);
   try {
-    const result = await postRequest("api/v1/signup", payload);
+    const result = await postRequest("auth/signup", payload);
     console.log(result);
-    setCurrentUserToken(result.data.data.access_token.token);
-    setToken(result.data.data.access_token.token);
+    setCurrentUserToken(result.data.token);
+    setToken(result.data.token);
     navigate("/", { replace: true });
     return null;
   } catch (err) {
-    console.log(err.response.data.error.message);
-    return err.response.data.error.message;
+    return err.response.data.error;
   }
 };
