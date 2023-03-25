@@ -1,5 +1,5 @@
 import "./App.css";
-import Login from "./pages/login/login.router";
+import { Login, Register } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import {
   NavbarRaiser,
@@ -13,6 +13,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/raiser" element={<NavbarRaiser />}>
           <Route index element={<HomeRaiser />} />
           <Route path="/raiser/create" element={<TicketRaiser />} />
