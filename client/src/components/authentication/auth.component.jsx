@@ -31,10 +31,14 @@ export const login = async (
     const result = await postRequest("auth/login", payload);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
-    navigate(-1, { replace: true });
+    if (result.data.type) {
+      navigate("/resolver", { replace: true });
+    } else {
+      navigate("/raiser", { replace: true });
+    }
     return null;
   } catch (err) {
-    return err.response.data.error;
+    return err.message;
   }
 };
 export const loggedIn = () => {
@@ -64,7 +68,7 @@ export const register = async (
     console.log(result);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
-    navigate("/", { replace: true });
+    navigate("/raiser", { replace: true });
     return null;
   } catch (err) {
     return err.response.data.error;

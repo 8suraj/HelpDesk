@@ -9,7 +9,7 @@
   text-transform: capitalize;
   &--green {
     border-radius: 4rem;
-    background-color: #2EC4B6;
+    background-color: #2ec4b6;
   }
   &--blue {
     background: #007bff;
@@ -21,8 +21,17 @@
   }
 
   &--transparent {
-    background: #353535;
+    background: transparent;
     color: #ffffff;
-    border-radius: 4rem;
   }
+  &-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 4px;
+  }
+}
+.active {
+  background: #071d47;
 }
