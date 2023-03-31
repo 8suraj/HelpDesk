@@ -49,9 +49,15 @@ export const NavbarResolver = () => {
               <div className="nav__p1">LOGO</div>
             </Link>
             <div className="nav__p2">
-              <div className="nav__item">Resolve</div>
-              <div className="nav__item">Assign</div>
-              <div className="nav__item">View</div>
+              {/* <Link to=>
+              <div className="nav__item">Resolved Tickets</div>
+              </Link> */}
+              <Link to="">
+                <div className="nav__item">Assigned Tickets</div>
+              </Link>
+              <Link to="tickets">
+                <div className="nav__item">Tickets</div>
+              </Link>
               <div className="nav__item">
                 <div className="nav__item-profile">
                   <img src={profile} alt="profile" />

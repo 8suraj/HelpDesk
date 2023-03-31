@@ -2,7 +2,8 @@ import "./App.css";
 import {
   Login,
   Register,
-  TicketsRouter,
+  TicketsRouterRaiser,
+  TicketsRouterResolver,
   RaiserRouter,
   ResolverRouter,
 } from "./pages";
@@ -17,12 +18,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/raiser" element={<NavbarRaiser />}>
           <Route index element={<RaiserRouter />} />
-          <Route path="/raiser/tickets" element={<TicketsRouter />} />
+          <Route path="/raiser/tickets" element={<TicketsRouterRaiser />} />
           <Route path="/raiser/tickets/:id" element={<Q />} />
         </Route>
         <Route path="/resolver" element={<NavbarResolver />}>
           <Route index element={<ResolverRouter />} />
-          <Route path="/resolver/resolve" element={<TicketsRouter />} />
+          <Route path="/resolver/tickets" element={<TicketsRouterResolver />} />
           {/* <Route path="/resolver/view" element={<CreateTicket />} /> */}
           {/* <Route path="/resolver/assign" element={<CreateTicket />} /> */}
         </Route>

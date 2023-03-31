@@ -4,8 +4,7 @@ import {
   getToken,
 } from "../components/authentication/auth.component";
 const axiosClient = axios.create();
-axiosClient.defaults.baseURL =
-  "http://localhost:7000/" + process.env.REACT_APP_API_V1;
+axiosClient.defaults.baseURL = "http://localhost:7000/";
 axiosClient.defaults.headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
@@ -14,6 +13,7 @@ axiosClient.defaults.headers = {
 axiosClient.defaults.withCredentials = true;
 
 export function getRequest([URL, param]) {
+  console.log(URL);
   return axiosClient
     .get(`/${URL}`, { params: param })
     .then((response) => response);

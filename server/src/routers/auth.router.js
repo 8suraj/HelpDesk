@@ -2,6 +2,7 @@ const { json } = require("express");
 const express = require("express");
 const User = require("../models/user.model");
 const { jwtGen } = require("../utils/utils");
+
 const authRouter = express.Router();
 
 authRouter.post("/signup", (req, res) => {

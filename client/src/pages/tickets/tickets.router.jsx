@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
-import { Button2 } from "../../components";
 import { getRequest } from "../../api/api";
 import "./tickets.styles.scss";
 import rightArrow from "../../assest/svgs/rightArrow.svg";
-import square from "../../assest/svgs/square.svg";
+import CircularCross from "../../assest/svgs/CircularCross.svg";
+import dot from "../../assest/svgs/dot.svg";
+
 export default function Tickets() {
   const [shouldFetchRes, setShouldFetchRes] = useState(false);
   const [shouldFetchUnRes, setShouldFetchUnRes] = useState(true);
   let Data1 = useSWR(
-    shouldFetchUnRes
-      ? [process.env.REACT_APP_API_RAISER_TICKET_UNRESOLVED]
-      : null,
+    shouldFetchUnRes ? [process.env.REACT_APP_API_TICKET_UNRESOLVED] : null,
     getRequest
   );
   let Data2 = useSWR(
-    shouldFetchRes ? [process.env.REACT_APP_API_RAISER_TICKET_RESOLVED] : null,
+    shouldFetchRes ? [process.env.REACT_APP_API_TICKET_RESOLVED] : null,
     getRequest
   );
   let Data = shouldFetchUnRes ? Data1 : Data2;
@@ -35,59 +34,67 @@ export default function Tickets() {
   };
   return (
     <div className="TicketView">
-      <div className="TicketView__container">
-        <div className="TicketView__container1">
-          <div onClick={resolvedHandler}>
-            <Button2
-              text="Active Tickets"
-              className="btn--transparent"
-              active={shouldFetchUnRes && shouldFetchUnRes}
-              img2={rightArrow}
-              img1={square}
-            />
+      <div>
+        <div className="ticket__container--form">
+          <div className="ticket__container--form--texts">
+            <h1>Quick Links</h1>
+            <ul>
+              <li
+                className={shouldFetchUnRes && "active"}
+                onClick={unresolvedHandler}
+              >
+                <p>
+                  <img src={dot} alt="" className="dot" />
+                  <span>Active Tickets</span>
+                </p>
+                <img src={rightArrow} alt="" />
+              </li>
+              <li
+                onClick={resolvedHandler}
+                className={shouldFetchRes && "active"}
+              >
+                <p>
+                  <img src={dot} alt="" className="dot" />
+                  <span>Resolved Tickets</span>
+                </p>
+                <img src={rightArrow} alt="" />
+              </li>
+            </ul>
           </div>
-          <div onClick={unresolvedHandler}>
-            <Button2
-              text="Resolved Tickets"
-              className="btn--transparent"
-              active={shouldFetchRes && shouldFetchRes}
-              img2={rightArrow}
-              img1={square}
-            />
-          </div>
-        </div>
-        <div className="TicketView__container2">
-          <span className="TicketView__container2-head">Tickets</span>
-          <div className="TicketView__container2-status">
-            <span>Status</span>
-            <div className="TicketView__container2-statusMain">
-              <div className="TicketView__container2-statusMain-active">
-                Active{" "}
+
+          <div className="ticket__container--form__accSub">
+            <div className="ticket__container--form__accSub--status">
+              <div className="ticket__container--form__accSub--status__First">
+                <div className="ticket__container--form__accSub--status__First__subCon">
+                  <p>Active</p>
+                  <p>{tickets && tickets.length}</p>
+                </div>
               </div>
-              <div>{tickets && tickets.length}</div>
+
+              <div className="ticket__container--form__accSub--status__First"></div>
             </div>
-          </div>
-          <div>
-            <table className="TicketView__container2-table">
-              <thead>
-                <tr>
-                  <th className="TicketView__container2-table--id">
-                    Ticket Type
-                  </th>
-                  <th className="TicketView__container2-table--id">ID</th>
-                  <th className="TicketView__container2-table--id">Status</th>
-                  <th className="TicketView__container2-table--id">
-                    Creation Date
-                  </th>
-                  <th className="TicketView__container2-table--id">Escalate</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tickets && tickets.map((item) => <Trs item={item} />)}
-              </tbody>
-            </table>
-            {error && <p>{error.message}</p>}
-            {isLoading && <p>Data Loading</p>}
+            <div className="ticket__container--form__accSub--tableContainer">
+              <div className="ticket__container--form__accSub--tableContainer--table">
+                <div className="ticket__container--form__accSub--tableContainer--table__tableBody">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Ticket Type</th>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Creation Date</th>
+                        <th>Escalateable</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {error && <p>{error.message}</p>}
+                      {isLoading && <p>Data Loading</p>}
+                      {tickets && tickets.map((item) => <Trs item={item} />)}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,7 +111,10 @@ function Trs({ item }) {
           {item._id.slice(item._id.length - 10, item._id.length - 1)}
         </Link>
       </td>
-      <td>{item.ticketStatus}</td>
+      <td>
+        <img src={CircularCross} alt="download" />
+        {item.ticketStatus}
+      </td>
       <td>
         {item &&
           `${new Date(item.created_at).toLocaleString("en-US", {
