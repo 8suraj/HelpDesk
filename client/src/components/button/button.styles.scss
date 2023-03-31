@@ -3,26 +3,32 @@
   outline: none;
   padding: 1rem 2rem;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1rem;
   cursor: pointer;
   text-transform: capitalize;
   &--green {
     border-radius: 4rem;
-    background-color: #2EC4B6;
+    background-color: #2ec4b6;
   }
   &--blue {
     background: #007bff;
     color: #ffffff;
     border-radius: 0.4rem;
-    // padding: 1.1rem 4rem;
-    // text-transform: none;
-    // text-transform: ;
   }
 
   &--transparent {
-    background: #353535;
+    background: transparent;
     color: #ffffff;
-    border-radius: 4rem;
   }
+  &-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 4px;
+  }
+}
+.active {
+  background: #071d47;
 }

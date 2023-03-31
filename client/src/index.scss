@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "gothic";
+  src: url("./assest/fonts/gothic.eot");
+  src: local("gothic"), url("./assest/fonts/gothic.woff") format("woff"),
+    url("./assest/fonts/gothic.ttf") format("truetype");
+}
+html {
+  font-size: 62.5%;
+}
+* {
+  box-sizing: border-box;
+  a {
+    text-decoration: none;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #030831;
+  background-repeat: no-repeat;
+  font-family: "gothic" !important;
+  overflow-x: hidden;
+  color: #ffffff;
+}
+
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+  color: white;
+}

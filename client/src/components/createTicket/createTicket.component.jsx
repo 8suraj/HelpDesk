@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./createTicket.styles.scss";
+import jwt_decode from "jwt-decode";
 import right from "../../assest/svgs/done100.svg";
 import wrong from "../../assest/svgs/close100.svg";
 import cross from "../../assest/svgs/cross.svg";
 import { Form, Formik } from "formik";
 import { postRequest } from "../../api/api";
-import Button from "../../components/button/button.component";
+import { Button1, getToken } from "../";
 import ValidationSchema from "../../components/authentication/validationSchemaTicket";
-import {
-  InputField,
-  TextField,
-} from "../../components/inputField/inputField.component";
+import { InputField, TextField } from "../../components";
 import Select from "react-select";
 const tickets = [
   { label: "Grievance", value: "Grievance" },
@@ -21,24 +19,46 @@ const tickets = [
   { label: "Change request", value: "Change request" },
   { label: "Marketing", value: "Marketing" },
 ];
-export const CreateTicket = () => {
+export const CreateTicket = ({ visibility }) => {
   const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  const [show, setShow] = useState(true);
   const [ticketID, setTicketID] = useState(false);
   const [ticketType, setTicketType] = useState(null);
-  const [ticketCreator, setTicketCreator] = useState(true);
+  const [ticketCreator, setTicketCreator] = useState(false);
   const handleSubmit = (values) => {
     const payload = JSON.stringify({ ...values, ticketType });
     console.log(payload);
     postRequest(process.env.REACT_APP_API_RAISER_CREATE_TICKET, payload)
       .then((result) => setTicketID(result.data.ticketId))
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        setError(err.message);
+      });
   };
+  React.useEffect(() => {
+    setData(jwt_decode(getToken()));
+    console.log(jwt_decode(getToken()));
+  }, []);
+
   const clickHandler = () => {
-    setTicketCreator(!ticketCreator);
+    setTicketCreator(false);
   };
-  // useEffect(() => {
-  //   setTicketCreator(true);
-  // }, []);
+  React.useEffect(() => {
+    if (visibility) {
+      setTicketCreator(true);
+      setTicketID(false);
+      setError(false);
+      setShow(true);
+    }
+  }, [visibility]);
+  React.useEffect(() => {
+    if (ticketID) {
+      setShow(false);
+    }
+    if (error) {
+      setShow(false);
+    }
+  }, [ticketID, error]);
   return (
     <div>
       {ticketCreator && (
@@ -50,13 +70,14 @@ export const CreateTicket = () => {
             </div>
           </div>
           <div className="createTicket__body">
-            {!ticketID && (
+            {show && (
               <Formik
                 initialValues={{
                   ticketType: "",
-                  name: "",
-                  email: "",
+                  name: data.username,
+                  email: data.email,
                   description: "",
+                  ticketRaiserId: data.id,
                 }}
                 enableReinitialize
                 validationSchema={ValidationSchema}
@@ -73,12 +94,6 @@ export const CreateTicket = () => {
                         options={tickets}
                       />
                     </div>
-                    {/* <InputField
-                  name="ticketType"
-                  className="ticketField"
-                  type="text"
-                  label="Ticket Type*"
-                /> */}
                     <InputField
                       name="name"
                       className="ticketField"
@@ -91,13 +106,14 @@ export const CreateTicket = () => {
                       type="email"
                       label="Email*"
                     />
+                    <InputField name="ticketRaiserId" type="hidden" />
                     <TextField
                       name="description"
                       className="ticketFieldtextarea"
                       label="Description"
                     />
                     {error && <div>{error}</div>}
-                    <Button
+                    <Button1
                       text="Submit"
                       type="submit"
                       className="btn--squareBlue"

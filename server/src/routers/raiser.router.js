@@ -1,20 +1,16 @@
 const express = require("express");
-const ticket = require("../models/ticket.model");
+const Ticket = require("../models/ticket.model");
+
 const raiserRouter = express.Router();
-raiserRouter.get("/view", (req, res) => {
-  console.log("ticket view");
-  res.status(200).json({
-    ad: "ticket view",
-  });
+
+raiserRouter.post("/create", async (req, res) => {
+  const newTicket = new Ticket(req.body);
+  ticket = await newTicket.save();
+  if (ticket) {
+    return res.status(200).json({ ticketId: ticket._id });
+  } else {
+    res.status(400);
+  }
 });
-raiserRouter.post("/create", (req, res) => {
-  console.log("ticket create");
-  console.log(req.body);
-  console.log(req.headers["authorization"]);
-  res.status(200).json({
-    ticketId: "someId",
-  });
-});
-// raiserRouter.get('/')
 
 module.exports = { raiserRouter };

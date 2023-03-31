@@ -1,15 +1,14 @@
 import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Formik } from "formik";
-import { UserContext } from "../../context/user.context";
+import { UserContext } from "../../../context/user.context";
+import { InputField, Button1 } from "../../../components";
+import { login } from "../../../components";
+import ValidationSchema from "../../../components/authentication/validationSchemaLogIn";
 import "./login.styles.scss";
-import Button from "../../components/button/button.component";
-import lock from "../../assest/svgs/lock.svg";
-import email from "../../assest/svgs/email.svg";
-import loginSvg from "../../assest/svgs/login.svg";
-import { InputField } from "../../components/inputField/inputField.component";
-import { login } from "../../components/authentication/auth.component";
-import ValidationSchema from "../../components/authentication/validationSchemaLogIn";
+import lock from "../../../assest/svgs/lock.svg";
+import email from "../../../assest/svgs/email.svg";
+import loginSvg from "../../../assest/svgs/login.svg";
 
 export default function Login() {
   const { setCurrentUserToken } = useContext(UserContext);
@@ -66,7 +65,7 @@ export default function Login() {
                         <p>Don’t have account ? Sign Up</p>
                       </div>
                     </Link>
-                    <Button
+                    <Button1
                       text="Continue"
                       type="submit"
                       className="btn--green login__container--custom"

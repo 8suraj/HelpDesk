@@ -1,0 +1,94 @@
+.TicketView {
+  font-family: "Gothic A1";
+  font-style: normal;
+  &__container {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 8rem;
+    display: flex;
+    gap: 5rem;
+    &1 {
+      flex: 2;
+      height: 100%;
+    }
+    &2 {
+      flex: 7;
+      height: 100%;
+      text-align: start;
+      padding: 1rem 3rem;
+      &-head {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 25px;
+        color: #007aff;
+      }
+      &-status {
+        padding-bottom: 2rem;
+        &Main {
+          display: flex;
+          gap: 4rem;
+          font-weight: 700;
+          &-active {
+            font-size: 24px;
+            line-height: 30px;
+            color: #34c73a;
+          }
+          font-size: 20px;
+          line-height: 25px;
+          color: #ffffff;
+        }
+        span {
+          display: block;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 19px;
+          color: rgba(255, 255, 255, 0.4);
+          padding-top: 3rem;
+        }
+      }
+      &-table {
+        border-collapse: collapse;
+        width: 100%;
+        &--id {
+          width: 9.5rem;
+        }
+        table {
+          border-collapse: collapse;
+          text-align: start;
+        }
+        thead {
+          background: #071d47;
+          border-radius: 5rem;
+          text-align: start;
+          font-size: 15px;
+          line-height: 19px;
+
+          color: #007aff;
+          th {
+            padding: 1rem;
+            text-align: start;
+            gap: 0.5rem;
+          }
+        }
+        // tbody {
+        //   text-align: center;
+        // }
+        td {
+          padding: 1rem;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 15px;
+          line-height: 19px;
+        }
+        tr:nth-child(even) {
+          background: #05113c;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+// .btn{
+
+// }

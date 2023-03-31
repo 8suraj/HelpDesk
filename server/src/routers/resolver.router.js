@@ -1,11 +1,5 @@
-const express = require('express')
+const express = require("express");
 
-const resolverRouter = express.Router()
-resolverRouter.get('/',(req, res)=>{
-    console.log("asdasdsadas")
-    res.status(200).json({
-      "ad":"asdasdsseeeeeeeeeee",
-    })
-  })
+const resolverRouter = express.Router();
 
-module.exports ={ resolverRouter}
+module.exports = { resolverRouter };

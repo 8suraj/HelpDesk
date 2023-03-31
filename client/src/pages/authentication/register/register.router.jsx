@@ -1,16 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Formik } from "formik";
-import { UserContext } from "../../context/user.context";
+import { UserContext } from "../../../context/user.context";
+import { InputField, Button1 } from "../../../components";
+import { register } from "../../../components";
+import ValidationSchema from "../../../components/authentication/validationSchemaRegister";
 import "./register.styles.scss";
-import Button from "../../components/button/button.component";
-import lock from "../../assest/svgs/lock.svg";
-import email from "../../assest/svgs/email.svg";
-import user from "../../assest/svgs/user.svg";
-import loginSvg from "../../assest/svgs/login.svg";
-import { InputField } from "../../components/inputField/inputField.component";
-import { register } from "../../components/authentication/auth.component";
-import ValidationSchema from "../../components/authentication/validationSchemaRegister";
+import lock from "../../../assest/svgs/lock.svg";
+import email from "../../../assest/svgs/email.svg";
+import user from "../../../assest/svgs/user.svg";
+import loginSvg from "../../../assest/svgs/login.svg";
 
 export default function Register() {
   const { setCurrentUserToken } = useContext(UserContext);
@@ -84,7 +83,7 @@ export default function Register() {
                         <p>Already have an account ? Sign In</p>
                       </div>
                     </Link>
-                    <Button
+                    <Button1
                       text="Continue"
                       type="submit"
                       className="btn--green login__container--custom"

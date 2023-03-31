@@ -1,7 +1,8 @@
 const { json } = require("express");
 const express = require("express");
 const User = require("../models/user.model");
-const { jwtGen, jwtVerify } = require("../utils/utils");
+const { jwtGen } = require("../utils/utils");
+
 const authRouter = express.Router();
 
 authRouter.post("/signup", (req, res) => {
@@ -19,7 +20,6 @@ authRouter.post("/signup", (req, res) => {
     User.findOne({ username: req.body.username.toLowerCase() }).then(
       (existingUsername) => {
         if (existingUsername !== null) {
-          console.log("sads");
           return res
             .status(400)
             .json({ error: "This username already exist!" });
@@ -44,10 +44,15 @@ authRouter.post("/login", (req, res) => {
         .status(403)
         .json({ error: "Username or password are incorrect" });
     }
+    const info = {
+      username: data.username,
+      email: data.email,
+      id: data._id,
+      isResolver: data.isResolver,
+    };
+    const token = jwtGen(info);
 
-    const token = jwtGen(data.toObject());
-
-    return res.json({ token, success: true });
+    return res.json({ token, success: true, type: data.isResolver });
   });
 });
 
