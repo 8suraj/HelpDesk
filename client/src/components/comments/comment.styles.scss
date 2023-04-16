@@ -1,0 +1,24 @@
+.comment {
+  &__container {
+    display: flex;
+    &--active {
+      display: flex;
+      justify-content: end;
+    }
+  }
+  background: #2ec4b6;
+  border-radius: 100px;
+  border: 1px solid #2ec4b6;
+  width: max-content;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: max-content;
+  gap: 2rem;
+  img {
+    border-radius: 50%;
+    outline: 5px solid #030831;
+    outline-offset: 3px;
+  }
+}

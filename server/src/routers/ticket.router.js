@@ -1,33 +1,36 @@
 const express = require("express");
-const { UserData } = require("../utils/utils");
+const {
+  getUnResolvedTickets,
+  getResolvedTickets,
+  createTicket,
+  assignTicket,
+} = require("../models/ticket.model");
 const Ticket = require("../models/ticket.model");
 const ticketRouter = express.Router();
+
 ticketRouter.get("/unresolved", async (req, res) => {
-  const userData = UserData(req.headers["authorization"]);
-  if (!userData.isResolver) {
-    const tickets = await Ticket.find({ isResolved: false, _id: userData._id });
-    return res.status(200).json({
-      tickets,
-    });
-  } else {
-    const tickets = await Ticket.find({ isResolved: false });
-    return res.status(200).json({
-      tickets,
-    });
-  }
+  const tickets = await getUnResolvedTickets(req.headers["authorization"]);
+  return res.status(200).json({
+    tickets,
+  });
 });
 ticketRouter.get("/resolved", async (req, res) => {
-  const userData = UserData(req.headers["authorization"]);
-  if (!userData.isResolver) {
-    const tickets = await Ticket.find({ isResolved: true, _id: userData._id });
-    return res.status(200).json({
-      tickets,
-    });
-  } else {
-    const tickets = await Ticket.find({ isResolved: true });
-    return res.status(200).json({
-      tickets,
-    });
-  }
+  const tickets = await getResolvedTickets(req.headers["authorization"]);
+  return res.status(200).json({
+    tickets,
+  });
+});
+ticketRouter.post("/create", async (req, res) => {
+  ticket = await createTicket(req.body);
+  if (!ticket) return res.status(400);
+  return res.status(200).json({ ticketId: ticket._id });
+});
+ticketRouter.post("/assign", async (req, res) => {
+  ticket = await assignTicket({
+    ticketId: req.body.ticketId,
+    token: req.headers["authorization"],
+  });
+  if (!ticket) return res.status(400);
+  return res.status(200).json({ ticketId: ticket._id });
 });
 module.exports = { ticketRouter };
