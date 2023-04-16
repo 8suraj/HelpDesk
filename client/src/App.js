@@ -6,9 +6,9 @@ import {
   TicketsRouterResolver,
   RaiserRouter,
   ResolverRouter,
+  TicketDetails,
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
-import { Q } from "./pages/tickets/1";
 import { NavbarRaiser, NavbarResolver } from "./components";
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/raiser" element={<NavbarRaiser />}>
           <Route index element={<RaiserRouter />} />
           <Route path="/raiser/tickets" element={<TicketsRouterRaiser />} />
-          <Route path="/raiser/tickets/:id" element={<Q />} />
+          <Route path="/raiser/tickets/:id" element={<TicketDetails />} />
         </Route>
         <Route path="/resolver" element={<NavbarResolver />}>
           <Route index element={<ResolverRouter />} />
