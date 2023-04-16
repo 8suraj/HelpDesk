@@ -1,0 +1,68 @@
+.ticketDetails {
+  &__container {
+    width: 70%;
+    border: 1px solid #2ec4b6;
+    margin: 5rem auto;
+    border-radius: 4px;
+    // overflow: scroll;
+  }
+  &__header {
+    width: 100%;
+    background-color: #2ec4b6;
+    display: flex;
+    flex-direction: row;
+    padding: 1.4rem;
+    border-radius: 4px 4px 0 0;
+    justify-content: space-between;
+    align-items: center;
+    &1 {
+      text-align: left;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.7rem;
+      line-height: 28px;
+      color: #eaeaea;
+      &--status {
+        span {
+          color: red;
+        }
+      }
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  &__footer {
+    border-top: 1px solid #2ec4b6;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    align-items: center;
+    // justify-content: space-between;
+    &--textField {
+      flex: 8;
+      &textarea {
+        resize: none;
+        box-sizing: border-box;
+        background-color: transparent;
+        width: calc(100%);
+        border: 2px solid #2ec4b6;
+        border-radius: 0.5rem;
+        font-family: "Nunito";
+        text-overflow: clip;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.6rem;
+        line-height: 1.4rem;
+        padding: 0.7rem;
+        height: 8rem;
+        color: #eaeaea;
+      }
+    }
+    &--sendBtn {
+      flex: 1;
+    }
+  }
+}

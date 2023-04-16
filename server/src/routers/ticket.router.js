@@ -5,7 +5,10 @@ const ticketRouter = express.Router();
 ticketRouter.get("/unresolved", async (req, res) => {
   const userData = UserData(req.headers["authorization"]);
   if (!userData.isResolver) {
-    const tickets = await Ticket.find({ isResolved: false, _id: userData._id });
+    const tickets = await Ticket.find({
+      isResolved: false,
+      ticketRaiserId: userData.id,
+    });
     return res.status(200).json({
       tickets,
     });
@@ -19,7 +22,10 @@ ticketRouter.get("/unresolved", async (req, res) => {
 ticketRouter.get("/resolved", async (req, res) => {
   const userData = UserData(req.headers["authorization"]);
   if (!userData.isResolver) {
-    const tickets = await Ticket.find({ isResolved: true, _id: userData._id });
+    const tickets = await Ticket.find({
+      isResolved: true,
+      ticketRaiserId: userData.id,
+    });
     return res.status(200).json({
       tickets,
     });
