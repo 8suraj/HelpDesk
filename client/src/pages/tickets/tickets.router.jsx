@@ -33,7 +33,7 @@ export default function Tickets() {
     setShouldFetchRes(!shouldFetchRes);
   };
   return (
-    <div className="ticket">
+    <div className="TicketView">
       <div>
         <div className="ticket__container--form">
           <div className="ticket__container--form--texts">
@@ -66,10 +66,7 @@ export default function Tickets() {
             <div className="ticket__container--form__accSub--status">
               <div className="ticket__container--form__accSub--status__First">
                 <div className="ticket__container--form__accSub--status__First__subCon">
-                  <p>
-                    {shouldFetchRes && "Resolved"}
-                    {shouldFetchUnRes && "Active"}
-                  </p>
+                  <p>Active</p>
                   <p>{tickets && tickets.length}</p>
                 </div>
               </div>
@@ -115,9 +112,7 @@ function Trs({ item }) {
         </Link>
       </td>
       <td>
-        {item.ticketStatus !== "Resolved" && (
-          <img src={CircularCross} alt="download" />
-        )}
+        <img src={CircularCross} alt="download" />
         {item.ticketStatus}
       </td>
       <td>

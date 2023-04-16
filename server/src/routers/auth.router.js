@@ -1,3 +1,4 @@
+const { json } = require("express");
 const express = require("express");
 const User = require("../models/user.model");
 const { jwtGen } = require("../utils/utils");
