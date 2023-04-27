@@ -29,7 +29,6 @@ export const login = async (
 
   try {
     const result = await postRequest("auth/login", payload);
-    console.log(result);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
     const decoded = decode(result.data.token);
@@ -67,7 +66,6 @@ export const register = async (
   });
   try {
     const result = await postRequest("auth/signup", payload);
-    console.log(result);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
     navigate("/raiser", { replace: true });

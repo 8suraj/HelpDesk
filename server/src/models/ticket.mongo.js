@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Ticket = require("./comment.mongo");
 
 const TicketSchema = new Schema(
   {
@@ -36,7 +37,10 @@ const TicketSchema = new Schema(
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    comments: [{ body: String, date: Date }],
+    comments: [{ body: String, date: Date, isResolver:{
+      type: Boolean,
+      default: false,
+    } }],
   },
   { timestamps: true }
 );

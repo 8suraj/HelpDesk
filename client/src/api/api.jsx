@@ -10,14 +10,12 @@ axiosClient.defaults.headers = {
 axiosClient.defaults.withCredentials = true;
 
 export function getRequest([URL, param]) {
-  console.log(URL);
   return axiosClient
     .get(`/${URL}`, { params: param })
     .then((response) => response);
 }
 
 export function postRequest(URL, payload) {
-  console.log(payload);
   return axiosClient.post(`/${URL}`, payload).then((response) => response);
 }
 

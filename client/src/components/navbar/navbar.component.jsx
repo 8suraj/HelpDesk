@@ -1,17 +1,41 @@
 import React, { useState } from "react";
+import { io } from "socket.io-client";
+import decode from "jwt-decode";
 import "./navbar.styles.scss";
 import { Link } from "react-router-dom";
 import profile from "../../assest/svgs/profile.svg";
 import { Outlet } from "react-router-dom";
-import { CreateTicket, Notification } from "..";
+import { CreateTicket, Notification,getToken } from "..";
+
 export const NavbarRaiser = () => {
   const [popUp, setPopUp] = useState(false);
+  const [notification, setNotification] = useState(false);
   const handler = () => {
     setPopUp(popUp + 1);
   };
+  const Socket = io("http://localhost:7000/", {
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        'Authorization': `Bearer ${getToken()}`,
+      },
+    },
+  },
+});
+ React.useEffect(()=>{
+  Socket.on("connect", (socket) => {console.log("connected");});
+  return ()=>{
+    Socket.on("disconnect", (socket) => {console.log("disconnected");});
+  }
+ },[])
+  
+  Socket.on("notification",(data)=>{console.log(data);}) 
   return (
     <>
-      <Notification open></Notification>
+      <Notification
+        open={notification}
+        onClose={() => setNotification(false)}
+      />
       <div className="nav">
         <div className="nav__container">
           <nav>
@@ -30,7 +54,7 @@ export const NavbarRaiser = () => {
                   <img src={profile} alt="profile" />
                 </div>
               </div>
-              <div className="nav__item">
+              <div className="nav__item" onClick={() => setNotification(true)}>
                 <div className="nav__item-notification">
                   <div>154</div>
                   <img
@@ -50,8 +74,29 @@ export const NavbarRaiser = () => {
 };
 
 export const NavbarResolver = () => {
+  const [notification, setNotification] = useState(false);
+  const Socket = io("http://localhost:7000/", {
+  transportOptions: {
+    polling: {
+      extraHeaders: {
+        'Authorization': `Bearer ${getToken()}`,
+      },
+    },
+  },
+});
+  React.useEffect(()=>{
+  Socket.on("connect", (socket) => {console.log("connected");});
+  return ()=>{
+    Socket.on("disconnect", (socket) => {console.log("disconnected");});
+  }
+ },[])
+  Socket.on("notification",(data)=>{console.log(data);}) 
   return (
     <>
+      <Notification
+        open={notification}
+        onClose={() => setNotification(false)}
+      />
       <div className="nav">
         <div className="nav__container">
           <nav>
@@ -73,7 +118,7 @@ export const NavbarResolver = () => {
                   <img src={profile} alt="profile" />
                 </div>
               </div>
-              <div className="nav__item">
+              <div className="nav__item" onClick={() => setNotification(true)}>
                 <div className="nav__item-notification">
                   <div>154</div>
                   <img

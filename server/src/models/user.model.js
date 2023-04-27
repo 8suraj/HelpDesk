@@ -38,9 +38,18 @@ const verifyUser = async (data) => {
   });
   return token;
 };
+const getUser = async (id) => {
+  const user = await Users.findOne(
+    { _id: id },
+    { _id: 0, __v: 0 }
+  );
+  if (user) return user;
+  return null;
+};
 module.exports = {
   isUserEmailExists,
   isUserNameExists,
   createUser,
   verifyUser,
+  getUser
 };

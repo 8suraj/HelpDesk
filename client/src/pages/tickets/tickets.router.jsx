@@ -114,7 +114,7 @@ export default function Tickets() {
                           <tr>
                             <td>{item?.ticketType}</td>
                             <td>
-                              <Link to={`/raiser/tickets/${item._id}`}>
+                              <Link to={`/${userData.isResolver?"resolver":"raiser"}/tickets/${item._id}`}>
                                 {item?._id.slice(
                                   item?._id.length - 10,
                                   item?._id?.length - 1
