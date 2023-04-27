@@ -1,94 +1,137 @@
-.TicketView {
-  font-family: "Gothic A1";
-  font-style: normal;
+.ticket {
   &__container {
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
-    margin-top: 8rem;
-    display: flex;
-    gap: 5rem;
-    &1 {
-      flex: 2;
-      height: 100%;
-    }
-    &2 {
-      flex: 7;
-      height: 100%;
-      text-align: start;
-      padding: 1rem 3rem;
-      &-head {
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 25px;
-        color: #007aff;
-      }
-      &-status {
-        padding-bottom: 2rem;
-        &Main {
-          display: flex;
-          gap: 4rem;
-          font-weight: 700;
-          &-active {
-            font-size: 24px;
-            line-height: 30px;
-            color: #34c73a;
-          }
-          font-size: 20px;
-          line-height: 25px;
-          color: #ffffff;
-        }
-        span {
-          display: block;
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 19px;
-          color: rgba(255, 255, 255, 0.4);
-          padding-top: 3rem;
-        }
-      }
-      &-table {
-        border-collapse: collapse;
-        width: 100%;
-        &--id {
-          width: 9.5rem;
-        }
-        table {
-          border-collapse: collapse;
-          text-align: start;
-        }
-        thead {
-          background: #071d47;
-          border-radius: 5rem;
-          text-align: start;
-          font-size: 15px;
-          line-height: 19px;
+    &--form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      width: 80%;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: 5rem auto;
 
-          color: #007aff;
-          th {
-            padding: 1rem;
-            text-align: start;
-            gap: 0.5rem;
+      &--texts {
+        flex: 3;
+        ul {
+          margin: 0rem;
+          padding: 0rem;
+          li {
+            width: 28.8rem;
+            height: 4.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0rem 0.8rem 0rem 0.8rem;
+
+            p {
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 20px;
+              color: #ffffff;
+
+              span {
+                padding-left: 1rem;
+              }
+            }
+
+            img {
+              width: 6px;
+              height: 10px;
+            }
           }
         }
-        // tbody {
-        //   text-align: center;
-        // }
-        td {
-          padding: 1rem;
-          font-style: normal;
-          font-weight: 700;
-          font-size: 15px;
-          line-height: 19px;
+      }
+      // Accounts & Subscription
+      &__accSub {
+        flex: 9;
+        &--status {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          &__First {
+            flex: 2;
+            &__subCon {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              p {
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 29px;
+                color: #34c73a;
+              }
+
+              p:last-child {
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 25px;
+                color: #ffffff;
+                padding-right: 5.5rem;
+              }
+            }
+          }
         }
-        tr:nth-child(even) {
-          background: #05113c;
-          border-radius: 4px;
+        // Table
+        &--tableContainer {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          // justify-content: center;
+          margin: 6.2rem 0rem 0rem 0rem;
+          &--table {
+            &__tableBody {
+              table {
+                border-collapse: collapse;
+                width: 60vw;
+
+                thead {
+                  background: #071d47;
+                  border-radius: 4px;
+                  height: 4.2rem;
+                  th {
+                    text-align: left;
+                    padding: 2rem 5rem 2rem 2rem;
+                    font-weight: 700;
+                    font-size: 1.3rem;
+                    line-height: 18px;
+                    color: #007aff;
+                  }
+                }
+
+                tbody {
+                  tr {
+                    td:nth-child(3) {
+                      color: red;
+                    }
+
+                    td:nth-child(5) {
+                      color: rgba(255, 255, 255, 0.35);
+                    }
+
+                    td {
+                      box-sizing: border-box;
+                      padding: 2rem 5rem 2rem 2rem;
+                      height: 3rem;
+                      font-weight: 700;
+                      font-size: 1.2rem;
+                      line-height: 18px;
+                      color: #ffffff;
+
+                      img {
+                        width: 2rem;
+                        height: 2rem;
+                        vertical-align: middle;
+                        padding-right: 10px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 }
-// .btn{
-
-// }

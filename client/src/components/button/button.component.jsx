@@ -1,9 +1,9 @@
 import React from "react";
 import "./button.styles.scss";
 
-export function Button1({ text, className }) {
+export function Button1({ text, className, onClick }) {
   return (
-    <button type="submit" className={`btn ${className}`}>
+    <button type="submit" className={`btn ${className}`} onClick={onClick}>
       {text}
     </button>
   );

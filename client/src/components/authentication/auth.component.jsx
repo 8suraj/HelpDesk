@@ -31,7 +31,8 @@ export const login = async (
     const result = await postRequest("auth/login", payload);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
-    if (result.data.type) {
+    const decoded = decode(result.data.token);
+    if (decoded.isResolver) {
       navigate("/resolver", { replace: true });
     } else {
       navigate("/raiser", { replace: true });
@@ -65,7 +66,6 @@ export const register = async (
   });
   try {
     const result = await postRequest("auth/signup", payload);
-    console.log(result);
     setCurrentUserToken(result.data.token);
     setToken(result.data.token);
     navigate("/raiser", { replace: true });

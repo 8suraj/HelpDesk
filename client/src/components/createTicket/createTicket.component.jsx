@@ -28,7 +28,6 @@ export const CreateTicket = ({ visibility }) => {
   const [ticketCreator, setTicketCreator] = useState(false);
   const handleSubmit = (values) => {
     const payload = JSON.stringify({ ...values, ticketType });
-    console.log(payload);
     postRequest(process.env.REACT_APP_API_RAISER_CREATE_TICKET, payload)
       .then((result) => setTicketID(result.data.ticketId))
       .catch((err) => {

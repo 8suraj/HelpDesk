@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  loggedIn,
-  getToken,
-} from "../components/authentication/auth.component";
+import { loggedIn, getToken } from "../components";
 const axiosClient = axios.create();
 axiosClient.defaults.baseURL = "http://localhost:7000/";
 axiosClient.defaults.headers = {
@@ -13,7 +10,6 @@ axiosClient.defaults.headers = {
 axiosClient.defaults.withCredentials = true;
 
 export function getRequest([URL, param]) {
-  console.log(URL);
   return axiosClient
     .get(`/${URL}`, { params: param })
     .then((response) => response);

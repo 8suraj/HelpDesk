@@ -1,63 +1,76 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-const TicketSchema = new Schema({
-  created_at: {
-    type: Date,
-  },
-  updated_at: {
-    type: Date,
-  },
-  escalated_at: {
-    type: Date,
-  },
-  escalatable: {
-    type: Boolean,
-  },
-  resolved_at: {
-    type: Date,
-  },
-  ticketStatus: {
-    type: String,
-  },
-  isResolved: {
-    type: Boolean,
-    default: false,
-  },
-  ticketType: {
-    type: String,
-    required: true,
-  },
-  assigned: {
-    type: Boolean,
-    default: false,
-  },
-  assignedTo: {
-    type: String,
-  },
-  ticketRaiserId: {
-    type: String,
-    required: true,
-  },
-  comments: [{ body: String, date: Date }],
-});
-TicketSchema.pre("save", function (next) {
-  now = new Date();
-  this.updated_at = now;
-  if (!this.created_at) {
-    this.created_at = now;
-    this.escalatable = false;
-    this.ticketStatus = "In-queue";
+const Ticket = require("./ticket.mongo");
+const { UserData } = require("../utils/utils");
+const getUnResolvedTickets = async (data) => {
+  const userData = UserData(data);
+  let tickets;
+  if (!userData.isResolver) {
+    tickets = await Ticket.find({
+      isResolved: false,
+      ticketRaiserId: userData.id,
+    });
   }
-  if (this.isResolved) {
-    this.resolved_at = now;
+  tickets = await Ticket.find({ isResolved: false });
+  if (!tickets) return [];
+  return tickets;
+};
+const getResolvedTickets = async (data) => {
+  const userData = UserData(data);
+  let tickets;
+  if (!userData.isResolver) {
+    tickets = await Ticket.find({
+      isResolved: true,
+      ticketRaiserId: userData.id,
+    });
   }
-  if (this.comments.body) {
-    this.date = now;
-  }
-  if (this.created_at.getTime() / 10000 >= 864000) {
-    this.escalatable = true;
-  }
-  next();
-});
-module.exports = mongoose.model("Tickets", TicketSchema);
+  tickets = await Ticket.find({ isResolved: true, assignedTo: userData.id });
+  if (!tickets) return [];
+  return tickets;
+};
+const createTicket = async (data) => {
+  const newTicket = new Ticket(data);
+  ticket = await newTicket.save();
+  if (!ticket) return null;
+  else return ticket;
+};
+const assignTicket = async (data) => {
+  const userData = UserData(data.token);
+  console.log(userData);
+  ticket = await Ticket.findOneAndUpdate(
+    { _id: data.ticketId },
+    { assignedTo: userData.id, assigned: true }
+  );
+  if (!ticket) return null;
+  else return ticket;
+};
+const getComments = async (ticketId) => {
+  const ticket = Ticket.findOne({ _id: ticketId }, { __v: 0 });
+  if (!ticket) return [];
+  return ticket.comments;
+};
+const setComments = async (data) => {
+  let ticket = await Ticket.findOne({ _id: data.ticketId }, { __v: 0 });
+  ticket = await Ticket.findOneAndUpdate(
+    { _id: data.ticketId },
+    {
+      comments: [
+        ...ticket.comments,
+        { body: data.comment, date: new Date(), isResolver: data.isResolver },
+      ],
+    }
+  );
+  // console.log(ticket.comments);
+};
+const getTicket = async(ticketId)=>{
+  const ticket = await Ticket.findOne({ _id: ticketId }, { __v: 0 });
+  if(!ticket) return {};
+  return ticket;
+}
+module.exports = {
+  getUnResolvedTickets,
+  getResolvedTickets,
+  createTicket,
+  assignTicket,
+  getComments,
+  setComments,
+  getTicket
+};
