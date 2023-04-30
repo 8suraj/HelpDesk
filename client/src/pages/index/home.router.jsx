@@ -1,8 +1,8 @@
-import React from "react";
-import { BannerRaiser, BannerIssuer } from "../../components";
+import React from 'react';
+import { Hero } from '../../components';
 export function Raiser() {
-  return <BannerRaiser />;
+	return <Hero />;
 }
 export function Resolver() {
-  return <BannerIssuer />;
+	return <Hero />;
 }

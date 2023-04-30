@@ -1,36 +1,49 @@
-import "./App.css";
+import './App.css';
 import {
-  Login,
-  Register,
-  TicketsRouterRaiser,
-  TicketsRouterResolver,
-  RaiserRouter,
-  ResolverRouter,
-  TicketDetails,
-} from "./pages";
-import { Routes, Route } from "react-router-dom";
-import { NavbarRaiser, NavbarResolver } from "./components";
+	Login,
+	Register,
+	TicketsRouterRaiser,
+	TicketsRouterResolver,
+	TicketDetails,
+} from './pages';
+import { Routes, Route } from 'react-router-dom';
+import {
+	Navigation,
+	CreateTicket,
+	Hero,
+} from './components';
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/raiser" element={<NavbarRaiser />}>
-          <Route index element={<RaiserRouter />} />
-          <Route path="tickets" element={<TicketsRouterRaiser />} />
-          <Route path="tickets/:id" element={<TicketDetails />} />
-        </Route>
-        <Route path="/resolver" element={<NavbarResolver />}>
-          <Route index element={<ResolverRouter />} />
-          <Route path="tickets" element={<TicketsRouterResolver />} />
-          <Route path="tickets/:id" element={<TicketDetails />} />
-          {/* <Route path="/resolver/view" element={<CreateTicket />} /> */}
-          {/* <Route path="/resolver/assign" element={<CreateTicket />} /> */}
-        </Route>
-      </Routes>
-    </div>
-  );
+	return (
+		<Routes>
+			<Route path='/login' element={<Login />} />
+			<Route path='/register' element={<Register />} />
+			<Route path='/' element={<Navigation />}>
+				<Route index element={<Hero />} />
+				<Route
+					path='create-tickets'
+					element={<CreateTicket />}
+				/>
+				{/* <Route
+					path='tickets'
+					element={<TicketsRouterRaiser />}
+				/>
+				<Route
+					path='tickets/:id'
+					element={<TicketDetails />}
+				/> */}
+			</Route>
+			{/* <Route path='/resolver' element={<Navigation />}>
+				<Route
+					path='tickets'
+					element={<TicketsRouterResolver />}
+				/>
+				<Route
+					path='tickets/:id'
+					element={<TicketDetails />}
+				/> 
+			</Route>*/}
+		</Routes>
+	);
 }
 
 export default App;

@@ -1,0 +1,30 @@
+.navigation {
+	color: var(--grey);
+	&__container {
+		align-items: center;
+		width: 85%;
+		margin: auto;
+		border-bottom: 2px solid #595d62;
+		display: flex;
+		justify-content: space-between;
+		padding: 0 2rem;
+		padding-top: 4rem;
+		padding-bottom: 1.5rem;
+		nav {
+			display: flex;
+			gap: 3rem;
+			a {
+				color: #595d62;
+			}
+		}
+	}
+	&__logo,
+	&__activity {
+		color: var(--white);
+	}
+	&__activity {
+		display: flex;
+		gap: 3rem;
+		align-items: center;
+	}
+}

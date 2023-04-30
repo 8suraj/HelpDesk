@@ -1,0 +1,132 @@
+.auth {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	background-color: var(--background-color);
+	background-image: -webkit-gradient(
+			radial,
+			54% 13%,
+			0,
+			54% 13%,
+			10,
+			color-stop(0.261, #0071f263),
+			color-stop(0.726, transparent)
+		),
+		-webkit-gradient(radial, 37% 69%, 0, 37% 69%, 10, color-stop(0.261, #4d181f), color-stop(0.726, transparent));
+	/* Android 2.3 */
+	background-image: -webkit-radial-gradient(
+			54% 13%,
+			16em 16em,
+			#0071f263 26.1%,
+			transparent 72.6%
+		),
+		-webkit-radial-gradient(37% 69%, 18em 18em, #4d181f
+					26.1%, transparent 72.6%);
+	/* IE10+ */
+	background-image: radial-gradient(
+			circle 16em at 54% 24%,
+			#0071f263 26.1%,
+			transparent 72.6%
+		),
+		radial-gradient(
+			circle 18em at 37% 69%,
+			#4d181f 26.1%,
+			transparent 72.6%
+		);
+	background-image: -ms-radial-gradient(
+			54% 13%,
+			16em 16em,
+			#0071f263 26.1%,
+			transparent 72.6%
+		),
+		-ms-radial-gradient(37% 69%, 18em 18em, #4d181f 26.1%, transparent
+					72.6%);
+
+	&__container {
+		width: 30vw;
+		// height: 80%;
+		margin: auto;
+		background: rgba(30, 30, 30, 0.58);
+		border: 1px solid rgba(166, 187, 179, 0.21);
+		box-shadow: 6px 2px 112px -15px #000000;
+		border-radius: 33px;
+		// height: 10rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		justify-content: space-evenly;
+		padding: 8rem 0;
+		& > div {
+			width: 80%;
+			text-align: center;
+		}
+	}
+	&__ca {
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 24px;
+		a {
+			// font-weight: 300;
+			font-size: 15px;
+			line-height: 24px;
+			color: var(--primary-color);
+		}
+	}
+	&__error {
+		color: red;
+		font-size: 15px;
+		line-height: 15px;
+		padding-top: 1rem;
+	}
+}
+
+.input {
+	text-align: start;
+	font-size: 15px;
+	line-height: 15px;
+	&__holder {
+		position: relative;
+
+		img {
+			width: 2.5rem;
+			position: absolute;
+			top: 50%;
+			transform: translate(30%, -50%);
+		}
+
+		textarea {
+			height: 15rem;
+			resize: none;
+			padding: 1rem;
+		}
+	}
+	&__wrapper {
+		p {
+			color: red;
+			font-size: 15px;
+			line-height: 15px;
+			padding-top: 1rem;
+		}
+	}
+	background: #191d20;
+	border-radius: var(--radius);
+	padding: 1.5rem 5rem;
+	width: 100%;
+	::placeholder {
+		// font-weight: 300;
+		// font-size: 20px;
+		// line-height: 24px;
+
+		color: #9dafc6;
+	}
+}
+.header {
+	font-weight: 800;
+	font-size: 40px;
+	line-height: 48px;
+}
+.btn--large {
+	width: 80%;
+	text-align: center;
+}
