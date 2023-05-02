@@ -1,8 +1,5 @@
 import React from 'react';
 import { Hero } from '../../components';
-export function Raiser() {
-	return <Hero />;
-}
-export function Resolver() {
+export default function Home() {
 	return <Hero />;
 }

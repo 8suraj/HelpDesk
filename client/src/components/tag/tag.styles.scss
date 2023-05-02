@@ -1,0 +1,18 @@
+.tag {
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 10px;
+	box-shadow: 6px 2px 108px -21px rgba(0, 0, 0, 0.81);
+	border-radius: 9px;
+	padding: 1rem;
+	display: inline-block;
+	&__brwn {
+		background: #4d181f;
+	}
+	&__blue {
+		background: #4463ec;
+	}
+	&__grey {
+		background: #443a3f;
+	}
+}

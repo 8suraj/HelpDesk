@@ -9,7 +9,7 @@ import {
 	getToken,
 	Select,
 } from '..';
-
+import { withAuthRaiser } from '../../hoc/auth/auth.hoc';
 import './createTicket.styles.scss';
 import persona from './persoona.svg';
 import ticket from './ticket.svg';
@@ -26,7 +26,7 @@ const tickets = [
 	{ label: 'Change request', value: 'Change request' },
 	{ label: 'Marketing', value: 'Marketing' },
 ];
-export default function Random() {
+function CreateTicket() {
 	const [error, setError] = useState(null);
 	const [data, setData] = useState(null);
 	const [show, setShow] = useState(true);
@@ -34,7 +34,6 @@ export default function Random() {
 	const [ticketType, setTicketType] = useState(null);
 	const handleSubmit = (values) => {
 		console.log(values);
-		console.log(ticketType);
 		const payload = JSON.stringify({
 			...values,
 			ticketType,
@@ -50,7 +49,6 @@ export default function Random() {
 	};
 	React.useEffect(() => {
 		setData(jwt_decode(getToken()));
-		console.log(jwt_decode(getToken()));
 	}, []);
 
 	React.useEffect(() => {
@@ -65,10 +63,12 @@ export default function Random() {
 		if (error) {
 			setShow(false);
 		}
+		setTimeout(() => {
+			setError(false);
+			setTicketID(false);
+			setShow(true);
+		}, 3000);
 	}, [ticketID, error]);
-	React.useEffect(() => {
-		console.log('asd', ticketType);
-	}, [ticketType]);
 	return (
 		<div className='create'>
 			<div className='create__container'>
@@ -84,7 +84,6 @@ export default function Random() {
 								fullName: data ? data.fullName : '',
 								email: data ? data.email : '',
 								description: '',
-								ticketRaiserId: data ? data.id : '',
 							}}
 							enableReinitialize
 							onSubmit={handleSubmit}>
@@ -107,10 +106,7 @@ export default function Random() {
 									img={ticket}
 									options={tickets}
 								/>
-								<InputField
-									name='ticketRaiserId'
-									type='hidden'
-								/>
+
 								<TextField
 									name='description'
 									placeholder='Description'
@@ -148,3 +144,4 @@ export default function Random() {
 		</div>
 	);
 }
+export default withAuthRaiser(CreateTicket);

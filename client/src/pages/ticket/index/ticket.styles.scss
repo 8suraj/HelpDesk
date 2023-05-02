@@ -1,0 +1,23 @@
+.ticket {
+	width: 100%;
+	padding: 2rem;
+	&__container {
+		width: 80%;
+		min-height: 83vh;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+	}
+	&__graph {
+		flex: 2;
+		display: flex;
+		gap: 10rem;
+		align-items: center;
+		padding-left: 3rem;
+	}
+	&__kanban {
+		flex: 8;
+		display: flex;
+		justify-content: space-between;
+	}
+}

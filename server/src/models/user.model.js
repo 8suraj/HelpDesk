@@ -23,6 +23,9 @@ const createUser = async (data) => {
 	const token = jwtGen({
 		id: user._id,
 		isResolver: user.isResolver,
+		username: user.username,
+		email: user.email,
+		fullName: user.fullName,
 	});
 	return token;
 };
@@ -38,6 +41,7 @@ const verifyUser = async (data) => {
 		isResolver: user.isResolver,
 		username: user.username,
 		email: user.email,
+		fullName: user.fullName,
 	});
 	return token;
 };

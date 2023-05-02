@@ -14,6 +14,9 @@ const TicketSchema = new Schema(
 		resolved_at: {
 			type: Date,
 		},
+		description: {
+			type: String,
+		},
 		ticketStatus: {
 			type: String,
 			default: 'In-queue',

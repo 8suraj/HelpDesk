@@ -63,11 +63,13 @@ export default function Register() {
 						img={Lock}
 						name='password'
 						placeholder='Password'
+						type='password'
 					/>
 					<InputField
 						img={Lock}
 						name='confirmPassword'
 						placeholder=' Confirm Password'
+						type='password'
 					/>
 					{error && (
 						<div className='auth__error'>

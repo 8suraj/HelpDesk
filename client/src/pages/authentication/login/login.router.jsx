@@ -43,6 +43,7 @@ export default function Login() {
 						img={Lock}
 						name='password'
 						placeholder='Password'
+						type='password'
 					/>
 					{error && (
 						<div className='auth__error'>

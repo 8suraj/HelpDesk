@@ -32,12 +32,8 @@ export const login = async (
 		const result = await postRequest('auth/login', payload);
 		setCurrentUserToken(result.data.token);
 		setToken(result.data.token);
-		// const decoded = decode(result.data.token);
 		navigate('/', { replace: true });
-		// if (decoded.isResolver) {
-		// } else {
-		// 	navigate('/raiser', { replace: true });
-		// }
+
 		return null;
 	} catch (err) {
 		return err.message;
@@ -48,9 +44,10 @@ export const loggedIn = () => {
 	return !!token && !isTokenExpired(token);
 };
 
-export const logout = (setCurrentUserToken) => {
+export const logout = (setCurrentUserToken, navigate) => {
 	localStorage.removeItem('user_token');
 	setCurrentUserToken(null);
+	navigate('/login', { replace: true });
 };
 
 export const register = async (
@@ -74,7 +71,7 @@ export const register = async (
 		);
 		setCurrentUserToken(result.data.token);
 		setToken(result.data.token);
-		navigate('/raiser', { replace: true });
+		navigate('/', { replace: true });
 		return null;
 	} catch (err) {
 		return err;
