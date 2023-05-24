@@ -3,11 +3,12 @@ import { getRequest } from '../../api/api';
 import useSWR from 'swr';
 import { io } from 'socket.io-client';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { withAuthResolver } from '../../hoc/auth/auth.hoc';
 import jwt_decode from 'jwt-decode';
 import { getToken } from '../../components';
 import DonutChart from '../../components/donutChart/donutChart.components';
 import TicketContainer from '../../components/ticketContainer/ticketModalContainer.components';
-export default function AssignedTickets() {
+function AssignedTickets() {
 	const [tickets, setTickets] = React.useState({
 		InQueue: [],
 		Resolved: [],
@@ -285,3 +286,4 @@ export default function AssignedTickets() {
 		</DragDropContext>
 	);
 }
+export default withAuthResolver(AssignedTickets);

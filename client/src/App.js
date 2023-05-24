@@ -4,7 +4,7 @@ import {
 	Register,
 	Ticket,
 	Home,
-	AssignedTicket,
+	AssignedTickets,
 } from './pages';
 import { Routes, Route } from 'react-router-dom';
 import { Navigation, CreateTicket } from './components';
@@ -23,7 +23,7 @@ function App() {
 				<Route path='tickets' element={<Ticket />} />
 				<Route
 					path='assigned-tickets'
-					element={<AssignedTicket />}
+					element={<AssignedTickets />}
 				/>
 			</Route>
 		</Routes>
