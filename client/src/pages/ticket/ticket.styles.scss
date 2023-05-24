@@ -7,7 +7,11 @@
 		margin: auto;
 		display: flex;
 		flex-direction: column;
+		&--assigned {
+			width: 90%;
+		}
 	}
+
 	&__graph {
 		flex: 2;
 		display: flex;
@@ -19,5 +23,8 @@
 		flex: 8;
 		display: flex;
 		justify-content: space-between;
+		&--assigned {
+			gap: 1.5rem;
+		}
 	}
 }

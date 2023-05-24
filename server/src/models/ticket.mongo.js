@@ -19,7 +19,7 @@ const TicketSchema = new Schema(
 		},
 		ticketStatus: {
 			type: String,
-			default: 'In-queue',
+			default: 'InQueue',
 		},
 		isResolved: {
 			type: Boolean,
@@ -40,10 +40,12 @@ const TicketSchema = new Schema(
 			type: mongoose.Types.ObjectId,
 			required: true,
 		},
-		comments: [
+		ticketUpdates: [
 			{
+				updateType: String,
 				body: String,
 				date: Date,
+				fullName: String,
 				isResolver: {
 					type: Boolean,
 					default: false,
@@ -57,9 +59,6 @@ TicketSchema.pre('save', function (next) {
 	now = new Date();
 	if (this.isResolved) {
 		this.resolved_at = now;
-	}
-	if (this.comments.body) {
-		this.date = now;
 	}
 	if (
 		(now.getTime() - this.createdAt.getTime()) / 10000 >=

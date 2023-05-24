@@ -4,10 +4,10 @@ import { Form, Formik } from 'formik';
 import { UserContext } from '../../../context/user.context';
 import { login, InputField } from '../../../components';
 import ValidationSchema from '../../../components/authentication/validationSchemaLogIn';
-import email from './email.svg';
-
+import email from '../../../asset/svgs/email.svg';
 import './auth.styles.scss';
-import Lock from './lock.svg';
+import Lock from '../../../asset/svgs/lock.svg';
+
 export default function Login() {
 	const { setCurrentUserToken } = useContext(UserContext);
 	const navigate = useNavigate();

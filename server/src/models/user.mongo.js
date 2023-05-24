@@ -26,6 +26,10 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		tempNotification: {
+			date: Date,
+			notification: String,
+		},
 	},
 	{ timestamps: true }
 );

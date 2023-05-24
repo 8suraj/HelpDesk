@@ -12,6 +12,7 @@
 	width: 100%;
 	height: 100%;
 	z-index: 10;
+	overflow-y: scroll;
 	&__container {
 		margin: auto;
 		width: 60vw;
@@ -49,6 +50,7 @@
 		flex: 4;
 		display: flex;
 		flex-direction: column;
+		min-height: 15rem;
 		&--header {
 			font-weight: 500;
 			font-size: 20px;
@@ -96,12 +98,12 @@
 			position: relative;
 			span {
 				position: absolute;
-				transform: translate(-50%, 70%);
+				transform: translate(-50%, 50%);
 				left: 50%;
-				font-size: 30px;
+				font-size: 18px;
 			}
 			img {
-				width: 60%;
+				width: 4rem;
 				filter: invert(43%) sepia(98%) saturate(664%)
 					hue-rotate(155deg) brightness(95%) contrast(103%);
 			}
@@ -130,5 +132,26 @@
 			justify-content: flex-start;
 			gap: 2rem;
 		}
+	}
+	&__history {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		&--status {
+			div {
+				font-size: 16px;
+				color: var(--grey);
+			}
+			font-weight: 300;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.5rem;
+		}
+		justify-content: start;
+		align-items: flex-start;
+		padding: 1rem;
 	}
 }

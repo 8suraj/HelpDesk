@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useField } from 'formik';
-import downArrow from './downArrow.svg';
+import downArrow from '../../asset/svgs/downArrow.svg';
 
 export function TextField({
 	name,

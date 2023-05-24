@@ -32,7 +32,7 @@ export const login = async (
 		const result = await postRequest('auth/login', payload);
 		setCurrentUserToken(result.data.token);
 		setToken(result.data.token);
-		navigate('/', { replace: true });
+		navigate('/home', { replace: true });
 
 		return null;
 	} catch (err) {
@@ -47,7 +47,7 @@ export const loggedIn = () => {
 export const logout = (setCurrentUserToken, navigate) => {
 	localStorage.removeItem('user_token');
 	setCurrentUserToken(null);
-	navigate('/login', { replace: true });
+	navigate('/', { replace: true });
 };
 
 export const register = async (
@@ -58,6 +58,8 @@ export const register = async (
 	setCurrentUserToken,
 	navigate
 ) => {
+	username = username.toUpperCase();
+	fullName = fullName.toUpperCase();
 	const payload = JSON.stringify({
 		username,
 		email,

@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 var { expressjwt: jwt } = require('express-jwt');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -33,6 +34,7 @@ const isExpired = (req, res, next) => {
 	}
 	next();
 };
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
 	'/api/v1/',

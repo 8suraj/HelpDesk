@@ -5,10 +5,9 @@ import { UserContext } from '../../../context/user.context';
 import { register, InputField } from '../../../components';
 import ValidationSchema from '../../../components/authentication/validationSchemaRegister';
 import '../login/auth.styles.scss';
-
-import Lock from './lock.svg';
-import persona from './persoona.svg';
-import email from './email.svg';
+import Lock from '../../../asset/svgs/lock.svg';
+import persona from '../../../asset/svgs/persoona.svg';
+import email from '../../../asset/svgs/email.svg';
 
 export default function Register() {
 	const { setCurrentUserToken } = useContext(UserContext);

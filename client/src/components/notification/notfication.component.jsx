@@ -6,16 +6,24 @@ import {
 	Slideright,
 } from './notification.styles';
 import { Overlay } from '../modal/modal.styles';
-import cross from '../../assest/svgs/cross.svg';
-
-import profile from '../../assest/svgs/profile.svg';
+import cross from '../../asset/svgs/cross.svg';
+import DetailsModal from '../detailsModal/detailsModal';
+import profile from '../../asset/svgs/profile.svg';
 export default function Notification({
 	open,
 	onClose,
 	data,
+	setData,
 }) {
-	const [children, setChildren] = React.useState([1]);
-	const [clear, setClear] = React.useState(null);
+	const [clear, setClear] = React.useState(false);
+	const [modalOpen, setModalOpen] = React.useState(false);
+	const clickHandler = () => {
+		console.log('clicked');
+		setClear(!clear);
+		setData([]);
+		setTimeout(() => onClose(), 1000);
+		setTimeout(() => setClear(false), 100);
+	};
 	if (!open) return null;
 	return (
 		<>
@@ -23,46 +31,94 @@ export default function Notification({
 				<NotificationHeader>
 					<h2> Notifications</h2>
 					<div>
-						<h2
-							onClick={() => {
-								setClear(true);
-								setTimeout(() => setChildren([]), 1000);
-								setTimeout(() => onClose(), 1000);
-							}}>
-							Clear
-						</h2>
+						{/* {console.log(data)} */}
+						<h2 onClick={clickHandler}>Clear</h2>
 						<img src={cross} alt='' onClick={onClose} />
 					</div>
 				</NotificationHeader>
-				{children?.map((item) => (
+				{console.log('clear', clear)}
+				{data?.map((item) => (
 					<>
 						{clear ? (
 							<Slideright>
 								<Notifications className=''>
 									<img src={profile} alt='' />
-									{/* <div>
-                    <strong>{data.username}</strong>
-                    <strong>{data.action}</strong>
-                    {data.body}
-                  </div> */}
+									<div onClick={() => setModalOpen(true)}>
+										<strong>{data.fullName}</strong>
+
+										{item?.updateType === 'status' ? (
+											item?.body === 'Created' ? (
+												<strong>
+													Created Ticket on{' '}
+													{item?.date?.split('T')[0]}
+												</strong>
+											) : (
+												<strong>
+													Ticket status changed to
+													{item?.body} on{' '}
+													{item?.date?.split('T')[0]}
+												</strong>
+											)
+										) : (
+											''
+										)}
+
+										{item.updateType === 'comment' && (
+											<>
+												<strong>
+													Commented on{' '}
+													{item.date.split('T')[0]}{' '}
+													<b>Comment:</b>
+													<br />
+												</strong>
+												<b>{item.body}</b>
+											</>
+										)}
+									</div>
 								</Notifications>
-								{() => setClear(null)}
 							</Slideright>
 						) : (
 							<Notifications className=''>
 								<img src={profile} alt='' />
-								<div>
-									<strong>Mandira</strong>
-									<strong>commented</strong>
-									Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Quasi consectetur
-									obcaecati perspiciatis nostrum possimus,
-									molestiae sint doloremque reprehenderit
-									cumque impedit ipsum quis inventore eius
-									non fugit iure qui! Ab, delectus.
+								<div onClick={() => setModalOpen(true)}>
+									<strong>{data.fullName}</strong>
+
+									{item?.updateType === 'status' ? (
+										item?.body === 'Created' ? (
+											<strong>
+												Created Ticket on{' '}
+												{item?.date?.split('T')[0]}
+											</strong>
+										) : (
+											<strong>
+												Ticket status changed to
+												{item?.body} on{' '}
+												{item?.date?.split('T')[0]}
+											</strong>
+										)
+									) : (
+										''
+									)}
+
+									{item.updateType === 'comment' && (
+										<>
+											<strong>
+												Commented on{' '}
+												{item.date.split('T')[0]}{' '}
+												<b>Comment:</b>
+												<br />
+											</strong>
+											<b>{item.body}</b>
+										</>
+									)}
 								</div>
 							</Notifications>
 						)}
+						<DetailsModal
+							data={item.ticket}
+							open={modalOpen}
+							onClose={() => setModalOpen(false)}
+						/>
 					</>
 				))}
 			</NotifcationModal>

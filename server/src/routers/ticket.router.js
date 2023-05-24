@@ -62,9 +62,40 @@ ticketRouter.get('/unassigned', async (req, res) => {
 	});
 });
 ticketRouter.get('/assigned-user', async (req, res) => {
-	const tickets = await getAssignedTicketsToUser(
+	let tickets;
+	const Tickets = await getAssignedTicketsToUser(
 		req.headers['authorization']
 	);
+	let sorted = req.query.sorted;
+	if (sorted) {
+		let Resolved = [],
+			InQueue = [],
+			Escalated = [],
+			InProgress = [];
+		Tickets.forEach((item) => {
+			if (item.ticketStatus === 'In-Queue') {
+				InQueue.push(item);
+			}
+			if (item.ticketStatus === 'InProgress') {
+				InProgress.push(item);
+			}
+			if (item.escalated) {
+				Escalated.push(item);
+			}
+			if (item.isResolved) {
+				Resolved.push(item);
+			}
+		});
+		tickets = {
+			Resolved,
+			InQueue,
+			InProgress,
+			Escalated,
+		};
+	} else {
+		tickets = Tickets;
+	}
+	console.log(tickets);
 	return res.status(200).json({
 		tickets,
 	});

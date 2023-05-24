@@ -1,6 +1,6 @@
 import React from 'react';
 import './hero.styles.scss';
-import hero from './hero.svg';
+import hero from '../../asset/svgs/hero.svg';
 export default function Hero() {
 	return (
 		<div className='hero'>

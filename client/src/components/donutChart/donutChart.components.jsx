@@ -18,7 +18,7 @@ const DonutChart = memo(({ data }) => {
 
 		const color = d3
 			.scaleOrdinal()
-			.domain(data.map((d) => d.value))
+			.domain(data.map((d) => d.name))
 			.range(data.map((d) => d.color));
 
 		const pie = d3.pie().value((d) => d.value);
@@ -41,7 +41,7 @@ const DonutChart = memo(({ data }) => {
 			.enter()
 			.append('path')
 			.attr('d', arc)
-			.attr('fill', (d) => color(d.data.value));
+			.attr('fill', (d) => color(d.data.name));
 	}, [data]);
 
 	useEffect(() => {

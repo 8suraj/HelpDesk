@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import personCalling from './personCalling.svg';
+import personCalling from '../../asset/svgs/personCalling.svg';
 import { Form, Formik } from 'formik';
 import { postRequest } from '../../api/api';
 import jwt_decode from 'jwt-decode';
@@ -11,11 +11,11 @@ import {
 } from '..';
 import { withAuthRaiser } from '../../hoc/auth/auth.hoc';
 import './createTicket.styles.scss';
-import persona from './persoona.svg';
-import ticket from './ticket.svg';
-import email from './email.svg';
-import right from '../../assest/svgs/done100.svg';
-import wrong from '../../assest/svgs/close100.svg';
+import persona from '../../asset/svgs/persoona.svg';
+import ticket from '../../asset/svgs/ticket.svg';
+import email from '../../asset/svgs/email.svg';
+import right from '../../asset/svgs/done100.svg';
+import wrong from '../../asset/svgs/close100.svg';
 
 const tickets = [
 	{ label: 'Grievance', value: 'Grievance' },

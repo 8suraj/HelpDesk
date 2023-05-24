@@ -21,13 +21,12 @@ export const withAuth = (Component) => (props) => {
 			if (isExpired) {
 				clearInterval(intervalId);
 			}
-		}, 5000);
-		console.log('tried', !loggedIn());
+		}, 2000);
 		return () => clearInterval(intervalId);
 	}, [isExpired]);
-	if (false) {
+	if (isExpired) {
 		logout(setCurrentUserToken, navigate);
-		return <Navigate to='/login' />;
+		return <Navigate to='/' />;
 	}
 	return <Component {...props} />;
 };
@@ -38,7 +37,7 @@ export const withAuthResolver = (Component) => (props) => {
 		return <Component {...props} />;
 	}
 	logout(setCurrentUserToken, navigate);
-	return <Navigate to='/login' />;
+	return <Navigate to='/' />;
 };
 export const withAuthRaiser = (Component) => (props) => {
 	const { setCurrentUserToken } = useContext(UserContext);
@@ -47,5 +46,5 @@ export const withAuthRaiser = (Component) => (props) => {
 		return <Component {...props} />;
 	}
 	logout(setCurrentUserToken, navigate);
-	return <Navigate to='/login' />;
+	return <Navigate to='/' />;
 };

@@ -7,7 +7,6 @@ export { default as CreateTicket } from './createTicket/createTicket.components'
 
 export { default as Navigation } from './navbar/navigation.components';
 
-export { default as Comment } from './comments/comment.component';
 export { default as Hero } from './hero/hero.components';
 export { Modal } from './modal/modal.component';
 export { default as Notification } from './notification/notfication.component';

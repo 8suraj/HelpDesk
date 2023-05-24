@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './detailsModal.styles.scss';
-import cross from './crooss.svg';
-import circle from './circle.svg';
+import cross from '../../asset/svgs/crooss.svg';
+import circle from '../../asset/svgs/circle.svg';
 import { Formik, Form } from 'formik';
-import { getToken } from '../authentication/auth.component';
 import { TextField } from '../inputField/inputField.component';
 import { io } from 'socket.io-client';
-
+import { getToken } from '../authentication/auth.component';
+import jwt_decode from 'jwt-decode';
 export default function DetailsModal({
 	open,
 	onClose,
 	data,
 }) {
-	const [comments, setComments] = React.useState([]);
+	const [ticketUpdates, setTicketUpdates] = React.useState([
+		...data.ticketUpdates,
+	]);
 	const [active, setActive] = useState('Comment');
 	const Socket = io('http://localhost:7000/', {
 		transportOptions: {
@@ -27,7 +29,6 @@ export default function DetailsModal({
 		Socket.on('connect', (socket) => {
 			console.log('connected');
 		});
-		// scrollToBottom();
 		return () => {
 			Socket.on('disconnect', (socket) => {
 				console.log('disconnected');
@@ -36,8 +37,29 @@ export default function DetailsModal({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	Socket.on('notification', (data) => {
-		setComments([...comments, data]);
+		setTicketUpdates([...ticketUpdates, data]);
 	});
+	const userData = jwt_decode(getToken());
+	const commentHandler = (values, { resetForm }) => {
+		const { textData } = values;
+		Socket.emit('update', {
+			ticketId: data?._id,
+			body: textData,
+			updateType: 'comment',
+			fullName: userData.fullName,
+			isResolver: userData.isResolver,
+		});
+		setTicketUpdates([
+			...ticketUpdates,
+			{
+				body: textData,
+				updateType: 'comment',
+				fullName: userData.fullName,
+				isResolver: userData.isResolver,
+			},
+		]);
+		resetForm({ values: '' });
+	};
 	const getSiblings = function (e) {
 		// for collecting siblings
 		let siblings = [];
@@ -70,19 +92,6 @@ export default function DetailsModal({
 			);
 		});
 	};
-	const commentHandler = (values, { resetForm }) => {
-		const { textData } = values;
-		Socket.emit('comment', {
-			ticketId: data?._id,
-			comment: textData,
-		});
-		setComments([
-			...comments,
-			{ body: textData, isResolver: false },
-		]);
-		resetForm({ values: '' });
-	};
-
 	const handleReset = (formik) => {
 		formik.resetForm({ values: '' });
 	};
@@ -117,14 +126,23 @@ export default function DetailsModal({
 				</div>
 				<div className='detailsModal__interaction'>
 					<span>Show:</span>
-					<span onClick={handleClick} value='All'>
+					<span
+						onClick={handleClick}
+						className={
+							active === 'All' &&
+							'detailsModal__interaction--active'
+						}>
 						All
 					</span>
 					<span onClick={handleClick}>History</span>
-					<span onClick={handleClick}>Comment</span>
+					<span
+						onClick={handleClick}
+						className='detailsModal__interaction--active'>
+						Comment
+					</span>
 				</div>
 				<div className='detailsModal__comment'>
-					{active === 'Comment' && (
+					{active == 'Comment' && (
 						<>
 							<div className='detailsModal__comment1'>
 								<img src={circle} alt='' />
@@ -161,22 +179,95 @@ export default function DetailsModal({
 						</>
 					)}
 					{active === 'History' && (
-						<>
-							{/* <div className='detailsModal__comment1'>
-								<img src={circle} alt='' />
-								<span>SR</span>
-							</div>
-							<div className='detailsModal__comment2'>
-								<textarea className='detailsModal__comment--box' />
-								<div className='detailsModal__comment--save'>
-									<Tag className='tag__blue' text='Save' />
-									<Tag
-										className='tag__grey'
-										text='Cancel'
-									/>
+						<div className='detailsModal__history'>
+							{data?.ticketUpdates.map((item) => (
+								<div className='detailsModal__history--status'>
+									{item?.updateType === 'status' && (
+										<>
+											<div className='detailsModal__comment1'>
+												<img src={circle} alt='' />
+												<span>
+													{item?.fullName
+														?.split(' ')[0][0]
+														.toUpperCase()}
+													{item?.fullName
+														?.split(' ')[1][0]
+														.toUpperCase()}
+												</span>
+											</div>
+											<div
+												style={{ 'font-weight': 'bold' }}>
+												{item?.fullName.toUpperCase()}
+											</div>
+										</>
+									)}
+									{item?.updateType === 'status' &&
+										(item?.body === 'Created' ? (
+											<div>
+												Created Ticket on{' '}
+												{item?.date?.split('T')[0]}
+											</div>
+										) : (
+											<div>
+												Ticket status changed to{' '}
+												{item?.body} on{' '}
+												{item?.date?.split('T')[0]}
+											</div>
+										))}
 								</div>
-							</div> */}
-						</>
+							))}
+						</div>
+					)}
+					{active === 'All' && (
+						<div className='detailsModal__history'>
+							{ticketUpdates?.map((item) => (
+								<div className='detailsModal__history--status'>
+									<div className='detailsModal__comment1'>
+										<img src={circle} alt='' />
+										<span>
+											{item?.fullName
+												?.split(' ')[0][0]
+												.toUpperCase()}
+											{item?.fullName?.split(' ')[1][0] &&
+												item?.fullName
+													?.split(' ')[1][0]
+													?.toUpperCase()}
+										</span>
+									</div>
+									<div style={{ 'font-weight': 'bold' }}>
+										{item?.fullName}
+									</div>
+									{item?.updateType === 'status' ? (
+										item?.body === 'Created' ? (
+											<div>
+												Created Ticket on{' '}
+												{item?.date?.split('T')[0]}
+											</div>
+										) : (
+											<div>
+												Ticket status changed to{' '}
+												{item?.body} on{' '}
+												{item?.date?.split('T')[0]}
+											</div>
+										)
+									) : (
+										''
+									)}
+
+									{item.updateType === 'comment' && (
+										<>
+											<div>
+												Commented on{' '}
+												{item.date.split('T')[0]}{' '}
+												<b>Comment:</b>
+												<br />
+											</div>
+											<b>{item.body}</b>
+										</>
+									)}
+								</div>
+							))}
+						</div>
 					)}
 				</div>
 			</div>
