@@ -1,5 +1,5 @@
-const express = require("express");
-const Ticket = require("../models/ticket.model");
+const express = require('express');
+const Ticket = require('../models/ticket.model');
 
 const raiserRouter = express.Router();
 

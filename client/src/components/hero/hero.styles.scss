@@ -1,0 +1,42 @@
+.hero {
+	&__container {
+		width: 75%;
+		margin: auto auto;
+		padding: 4.5rem 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&__text,
+	&__svg {
+		flex: 1;
+	}
+	&__text {
+		position: relative;
+		box-decoration-break: slice;
+		font-weight: 800;
+		font-size: 60px;
+		line-height: 70px;
+		transform: translateX(20%);
+		background: transparent;
+		p {
+			font-weight: 800;
+			font-size: 60px;
+			line-height: 80px;
+			background: transparent;
+			transform: translateX(30%);
+		}
+	}
+	&__svg {
+		img {
+			width: 48rem;
+		}
+	}
+	&__box {
+		position: absolute;
+		border: 5px solid var(--white);
+		width: 26%;
+		left: 1%;
+		top: 70%;
+	}
+}
