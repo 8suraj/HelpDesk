@@ -5,6 +5,7 @@ import {
 	Ticket,
 	Home,
 	AssignedTickets,
+	Stats,
 } from './pages';
 import { Routes, Route } from 'react-router-dom';
 import { Navigation, CreateTicket } from './components';
@@ -25,6 +26,7 @@ function App() {
 					path='assigned-tickets'
 					element={<AssignedTickets />}
 				/>
+				<Route path='stats' element={<Stats />} />
 			</Route>
 		</Routes>
 	);

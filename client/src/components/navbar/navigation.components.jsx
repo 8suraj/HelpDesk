@@ -64,6 +64,7 @@ function Navigation() {
 							<nav>
 								<Link to='tickets'>Tickets</Link>
 								<Link to='create-tickets'>Create</Link>
+								<Link to='stats'>Stats</Link>
 							</nav>
 						)}
 					{loggedIn() &&
@@ -73,6 +74,7 @@ function Navigation() {
 								<Link to='assigned-tickets'>
 									Assigned Tickets
 								</Link>
+								<Link to='stats'>Stats</Link>
 							</nav>
 						)}
 

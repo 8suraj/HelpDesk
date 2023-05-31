@@ -257,8 +257,7 @@ export default function DetailsModal({
 									{item.updateType === 'comment' && (
 										<>
 											<div>
-												Commented on{' '}
-												{item.date.split('T')[0]}{' '}
+												Commented on {item?.date}{' '}
 												<b>Comment:</b>
 												<br />
 											</div>
