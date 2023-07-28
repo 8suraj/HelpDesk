@@ -46,7 +46,9 @@ app.use('/api/v1/raiser', raiserRouter);
 app.use('/api/v1/resolver', resolverRouter);
 app.use('api/v1/profile', profileRouter);
 app.use('/auth', authRouter);
-
+// app.use(
+// 	express.static(path.join(__dirname, '..', 'public'))
+// );
 app.get('/*', (req, res) => {
 	res.sendFile(
 		path.join(__dirname, '..', 'public', 'index.html')
